@@ -15,6 +15,7 @@ export const color = {
   Main: "##eb4c60",
   black: "#3d3d3d",
   white: "#FFFFFF",
+  light_gray: "#f3f3f3",
 };
 
 export const size = {
