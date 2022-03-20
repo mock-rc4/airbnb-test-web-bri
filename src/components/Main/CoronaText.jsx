@@ -21,7 +21,7 @@ const BoxStyle = styled.div`
     text-decoration: underline;
     color: white;
     background: ${color.black};
-    padding: 2rem 0;
+    padding-top: 2rem;
     cursor: pointer;
 
     &:hover {
