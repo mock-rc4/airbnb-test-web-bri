@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
-export const PageWrap = styled.div`
+export const PageWrap = css`
   width: 100vw;
   height: 100vh;
 `;
@@ -12,10 +13,14 @@ export const flexCenter = css`
 `;
 
 export const color = {
-  Main: "##eb4c60",
-  black: "#3d3d3d",
+  Main: "#f53a57",
+  black: "#151515",
   white: "#FFFFFF",
-  light_gray: "#f3f3f3",
+  light_gray: "#f5f5f5",
+  light_gray2: "#eeeeee",
+  dark_gray: "#555555",
+  dark_gray2: "#333333",
+  medium_gray: "#dfdfdf",
 };
 
 export const size = {
@@ -23,6 +28,12 @@ export const size = {
   tablet: "768px",
   desktop: "1440px",
 };
+
+export const mainTitle = css`
+  font-size: 3.3rem;
+  font-weight: 530;
+  padding-bottom: 4.8rem;
+`;
 
 export const device = {
   mobile: `@media only screen and (max-width: ${size.mobile})`,

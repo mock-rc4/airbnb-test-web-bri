@@ -36,11 +36,21 @@ const Footer = () => {
               </span>
             </div>
             <div className="sns">
-              <img src="image/ic-facebook.svg" alt="페이스북" />
-              <img src="image/ic-twitter.svg" alt="트위터" />
-              <img src="image/ic-instagram.svg" alt="인스타" />
-              <img src="image/ic-blog.svg" alt="블로그" />
-              <img src="image/ic-naverpost.svg" alt="포스트" />
+              <a href="https://www.facebook.com/AirbnbKorea">
+                <img src="image/ic-facebook.svg" alt="페이스북" />
+              </a>
+              <a href="https://twitter.com/airbnb">
+                <img src="image/ic-twitter.svg" alt="트위터" />
+              </a>
+              <a href="https://www.airbnb.co.kr/?has_logged_out=1">
+                <img src="image/ic-instagram.svg" alt="인스타" />
+              </a>
+              <a href="https://blog.naver.com/airbnbkr">
+                <img src="image/ic-blog.svg" alt="블로그" />
+              </a>
+              <a href="https://post.naver.com/airbnb_kr">
+                <img src="image/ic-naverpost.svg" alt="포스트" />
+              </a>
             </div>
           </div>
         </section>
@@ -53,6 +63,7 @@ export default Footer;
 
 const PageWrap = styled.div`
   width: 100%;
+
   height: fit-content;
   background: ${color.light_gray};
   ${flexCenter}
@@ -114,6 +125,13 @@ const PageWrap = styled.div`
         width: 1.2rem;
         height: 1.2rem;
         margin-right: 1rem;
+      }
+    }
+
+    .sns {
+      img {
+        width: 18px;
+        margin-left: 2rem;
       }
     }
   }

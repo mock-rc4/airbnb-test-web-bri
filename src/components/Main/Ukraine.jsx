@@ -22,6 +22,7 @@ const BoxStyle = styled.section`
   background: ${color.black};
   ${flexCenter};
   padding-bottom: 9.6rem;
+  padding-top: 17rem;
 
   .ukraine-box {
     position: relative;
@@ -47,6 +48,7 @@ const BoxStyle = styled.section`
       border-radius: 0.6rem;
       background: ${color.Main};
       color: white;
+      cursor: pointer;
     }
   }
 `;
