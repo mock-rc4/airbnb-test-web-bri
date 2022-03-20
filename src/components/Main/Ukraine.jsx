@@ -47,6 +47,7 @@ const BoxStyle = styled.section`
       border-radius: 0.6rem;
       background: ${color.Main};
       color: white;
+      cursor: pointer;
     }
   }
 `;
