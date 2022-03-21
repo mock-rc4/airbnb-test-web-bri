@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { flexCenter, color } from "../common/styled";
+import SearchItem from "./SearchItem";
 
 const SearchListSection = () => {
   //local state
@@ -20,6 +21,12 @@ const SearchListSection = () => {
               <a>자세히 알아보기</a>
             </p>
           </div>
+
+          <div className="item-section">
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+          </div>
         </div>
       </WrapStyle>
     </>
@@ -36,8 +43,7 @@ const WrapStyle = styled.section`
   justify-content: center;
 
   .list-section {
-    border: 1px solid black;
-    width: 93%;
+    width: 94%;
   }
 
   .info-text-section {
@@ -45,7 +51,7 @@ const WrapStyle = styled.section`
 
     p {
       font-size: 1.4rem;
-      padding-bottom: 2.8rem;
+      padding-bottom: 2.7rem;
       color: ${color.dark_gray};
 
       &:nth-child(2) {
