@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { storage } from "../../firebase/fBase";
-import { ref, getDownloadURL } from "@firebase/storage";
 import { flexCenter, color } from "../common/styled";
 
 const AboutHosting = () => {
   return (
     <>
       <BoxStyle>
-        <img src="/image/aboutHostingImage.jpg" />
+        <img src="/img/aboutHostingImage.jpg" />
         <div className="text-box">
           <span>
             호스팅에 관해<br></br>궁금하신 점이<br></br>있나요?

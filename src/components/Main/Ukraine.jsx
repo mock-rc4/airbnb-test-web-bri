@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { color, flexCenter } from "../common/styled";
 
@@ -22,7 +22,7 @@ const BoxStyle = styled.section`
   background: ${color.black};
   ${flexCenter};
   padding-bottom: 9.6rem;
-  padding-top: 17rem;
+  padding-top: 15rem;
 
   .ukraine-box {
     position: relative;

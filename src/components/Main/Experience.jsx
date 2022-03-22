@@ -50,22 +50,23 @@ const BoxStyle = styled.section`
 
     .experience-cardbox {
       width: 100%;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
       box-sizing: border-box;
       section {
         position: relative;
-        width: 49%;
+        width: 100%;
         box-sizing: border-box;
       }
 
       img {
         width: 100%;
         border-radius: 1.3rem;
+        box-sizing: border-box;
       }
 
       .enjoy {
-        width: 100%;
         position: absolute;
         top: 0;
         padding: 5rem 4rem;

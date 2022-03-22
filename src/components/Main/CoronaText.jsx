@@ -13,7 +13,7 @@ export default CoronaText;
 
 const BoxStyle = styled.div`
   width: 100%;
-
+  height: 50px;
   p {
     font-size: 1.4rem;
     text-align: center;
@@ -21,7 +21,7 @@ const BoxStyle = styled.div`
     text-decoration: underline;
     color: white;
     background: ${color.black};
-    padding-top: 2rem;
+    padding: 2rem;
     cursor: pointer;
 
     &:hover {
