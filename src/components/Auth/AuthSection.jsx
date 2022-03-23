@@ -1,50 +1,28 @@
 import React from "react";
 import styled from "styled-components";
-import { flexCenter, color } from "../common/styled";
-import { auth } from "../../firebase/fBase";
-import {
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { flexCenter, color, authInput } from "../common/styled";
+import AuthSocial from "./AuthSocial";
+import { authButton } from "../common/styled";
 
 const AuthSection = () => {
   //global state
   //local state
   // life cycle
   // function
-  const onGoogleClick = async (e) => {
-    const {
-      target: { name },
-    } = e;
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const onFacebookClick = async (e) => {
-    const {
-      target: { name },
-    } = e;
-    try {
-      const provider = new FacebookAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   return (
     <AuthSectionBoxStyle>
       <h2>에어비앤비에 오신 것을 환영합니다.</h2>
       <section className="auth-phone">
         <div>
-          <input type="text" />
+          <p className="country-text">국가/지역</p>
+          <select name="nation">
+            <option value="한국 (+82)">한국 (+82)</option>
+            <option value="미국 (+1)">미국 (+1)</option>
+            <option value="캐나다 (+1)">캐나다 (+1)</option>
+          </select>
+
+          {/* <input type="text" /> */}
           <input type="text" placeholder="전화번호" />
         </div>
         <p>
@@ -56,25 +34,6 @@ const AuthSection = () => {
         </p>
         <button>계속</button>
       </section>
-      <p className="or">또는</p>
-      <section className="auth-social">
-        <button onClick={onFacebookClick}>
-          <img src="/image/ic-login-facebook.svg" />
-          페이스북으로 로그인하기
-        </button>
-        <button onClick={onGoogleClick}>
-          <img src="/image/ic-login-google.svg" />
-          구글로 로그인하기
-        </button>
-        <button>
-          <img src="/image/ic-login-apple.svg" />
-          애플로 로그인하기
-        </button>
-        <button>
-          <img src="/image/ic-login-email.svg" />
-          이메일로 로그인하기
-        </button>
-      </section>
     </AuthSectionBoxStyle>
   );
 };
@@ -82,11 +41,12 @@ const AuthSection = () => {
 export default AuthSection;
 
 const AuthSectionBoxStyle = styled.section`
-  height: 580px;
-  overflow-y: scroll;
+  height: fit-content;
   border-radius: 1.5rem;
   box-sizing: border-box;
   padding: 2rem;
+  padding-bottom: 0;
+  position: relative;
 
   h2 {
     font-size: 22px;
@@ -101,27 +61,43 @@ const AuthSectionBoxStyle = styled.section`
     ${flexCenter}
     &>div {
       width: 100%;
-      border: 1px solid ${color.dark_gray};
+      border: 1px solid ${color.medium_gray2};
       border-radius: 10px;
       overflow: hidden;
       margin-top: 10px;
     }
 
-    input {
+    .country-text {
+      position: absolute;
+      top: 8.7rem;
+      left: 3.4rem;
+      color: ${color.medium_gray2};
+
+      z-index: 10;
+    }
+
+    select {
       width: 100%;
-      box-sizing: border-box;
-      font-size: 16px;
-      padding: 18px 10px;
+      padding: 2.6rem 1rem 1rem 1rem;
       border: none;
+      border-bottom: 1px solid ${color.medium_gray2};
+      font-size: 1.6rem;
+      color: ${color.dark_gray2};
       box-sizing: border-box;
-      &:nth-child(1) {
-        border-bottom: 1px solid ${color.dark_gray};
-      }
+      position: relative;
 
       &:focus {
-        border: 2px solid ${color.black};
+        //border: 1px solid ${color.black};
         outline: none;
-        border-radius: 10px;
+        border-radius: 9px;
+      }
+    }
+
+    input {
+      ${authInput};
+      border: none;
+      &:focus {
+        outline: none;
       }
     }
     p {
@@ -136,53 +112,7 @@ const AuthSectionBoxStyle = styled.section`
       }
     }
     button {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      padding: 15px;
-      margin: 15px;
-      font-size: 16px;
-      cursor: pointer;
-      background: linear-gradient(
-        to right,
-        rgb(230, 1, 60) 0%,
-        rgb(220, 1, 126) 100%
-      );
-    }
-  }
-  .or {
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    color: ${color.dark_gray};
-    padding: 8px 0;
-  }
-
-  .auth-social {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    ${flexCenter}
-
-    button {
-      position: relative;
-      width: 100%;
-      box-sizing: border-box;
-      background: white;
-      padding: 15px 0;
-      margin: 8px 0;
-      border: 1px solid black;
-      border-radius: 8px;
-      font-weight: 550;
-      cursor: pointer;
-
-      img {
-        position: absolute;
-        width: 20px;
-        top: 11px;
-        left: 20px;
-      }
+      ${authButton};
     }
   }
 `;

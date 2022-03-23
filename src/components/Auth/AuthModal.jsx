@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { flexCenter, color } from "../common/styled";
+import AuthEmail from "./AuthEmail";
 import AuthSection from "./AuthSection";
+import AuthSocial from "./AuthSocial";
+import Signup from "./Signup";
 
 const AuthModal = ({ handleClickAuth }) => {
+  //local state
+  const [toggleAuthMethod, setToggleAuthMethod] = useState({
+    method: "phone",
+    text: "이메일",
+  });
+
+  //function
+  const handleClickToggle = () => {
+    if (toggleAuthMethod.method === "phone")
+      setToggleAuthMethod({ method: "email", text: "핸드폰으" });
+    else if (toggleAuthMethod.method === "email")
+      setToggleAuthMethod({ method: "phone", text: "이메일" });
+  };
+
   return (
     <ModalBoxStyle>
       {/* 모달창 */}
@@ -12,7 +29,13 @@ const AuthModal = ({ handleClickAuth }) => {
           <span onClick={handleClickAuth}>✕</span>
           <h3>로그인 또는 회원 가입</h3>
         </div>
-        <AuthSection />
+        {toggleAuthMethod.method === "phone" && <AuthSection />}
+        {toggleAuthMethod.method === "email" && <AuthEmail />}
+        {/* <Signup /> */}
+        <AuthSocial
+          authMethod={toggleAuthMethod.text}
+          handleClickToggle={handleClickToggle}
+        />
       </div>
 
       {/* 뒤에 까만 배경 */}
@@ -35,17 +58,17 @@ const ModalBoxStyle = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
-  ${flexCenter}
+  z-index: 1000;
+  ${flexCenter};
 
   .auth-content {
-    position: relative;
+    position: absolute;
     width: 568px;
-    //height: 643px;
-    z-index: 10;
+
     background: white;
     border-radius: 1.5rem;
     box-sizing: border-box;
+    z-index: 10;
 
     // 애니메이션
     @keyframes fadeInUp {
@@ -87,5 +110,6 @@ const ModalBoxStyle = styled.div`
     position: fixed;
     top: 0;
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 7;
   }
 `;
