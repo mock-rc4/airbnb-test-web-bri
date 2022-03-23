@@ -64,9 +64,9 @@ const WrapStyle = styled.div`
   border-bottom: 1px solid ${color.medium_gray};
   padding: 1.5rem 0;
   ${flexCenter};
-  position: fixed;
-  top: 70px;
-  z-index: 4;
+  position: sticky;
+  top: 8.8rem;
+  z-index: 1;
 `;
 
 const BoxStyle = styled.div`

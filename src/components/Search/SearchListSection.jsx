@@ -26,6 +26,11 @@ const SearchListSection = () => {
             <SearchItem />
             <SearchItem />
             <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
           </div>
         </div>
       </WrapStyle>
@@ -36,7 +41,7 @@ const SearchListSection = () => {
 export default SearchListSection;
 
 const WrapStyle = styled.section`
-  width: 58%;
+  width: 100%;
   box-sizing: border-box;
 
   display: flex;
@@ -48,7 +53,7 @@ const WrapStyle = styled.section`
 
   .info-text-section {
     border-bottom: 1px solid ${color.medium_gray};
-
+    padding-top: 3rem;
     p {
       font-size: 1.4rem;
       padding-bottom: 2.7rem;
