@@ -5,41 +5,54 @@ import { ReactComponent as Star } from "../../svg/ic-star.svg";
 import { ReactComponent as Heart } from "../../svg/ic-heart.svg";
 import { ReactComponent as Share } from "../../svg/ic-share.svg";
 
-const DetailTitleSection = () => {
-  return (
-    <WrapperStyle>
-      <section className="title-section">
-        <h2>숙소이름</h2>
-        <div className="title-subtext-section">
-          <div className="title-subtext-left">
-            <span className="star-rate">
-              <StarStyle />
-              5.0(게산값)
-            </span>
-            <span className="review">후기 n개</span>
-            <span className="location">위치</span>
-          </div>
+const DetailTitleSection = ({ contentRef }) => {
+  //타이틀 섹션에서 필요한 state: 숙소이름, 별점-후기, 위치, 이미지
 
-          <div className="title-subtext-right">
-            <button>
-              <ShareStyle />
-              <p>공유하기</p>
-            </button>
-            <button>
-              <HeartStyle />
-              <p>저장</p>
-            </button>
+  //api 가져오기.
+  return (
+    <WrapperStyle ref={(el) => (contentRef.current[0] = el)}>
+      <BoxStyle>
+        <section className="title-section">
+          <h2>숙소이름</h2>
+          <div className="title-subtext-section">
+            <div className="title-subtext-left">
+              <span className="star-rate">
+                <StarStyle />
+                5.0(게산값)
+              </span>
+              <span className="review">후기 n개</span>
+              <span className="location">위치</span>
+            </div>
+
+            <div className="title-subtext-right">
+              <button>
+                <ShareStyle />
+                <p>공유하기</p>
+              </button>
+              <button>
+                <HeartStyle />
+                <p>저장</p>
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="image-section">
-        <img src="/img/aboutHostingImage.jpg" alt="숙소 이미지" />
-      </section>
+        </section>
+        <section className="image-section">
+          <img src="/img/aboutHostingImage.jpg" alt="숙소 이미지" />
+        </section>
+      </BoxStyle>
     </WrapperStyle>
   );
 };
 export default DetailTitleSection;
+
+const BoxStyle = styled.div`
+  min-width: 110rem;
+  width: 80%;
+`;
+
 const WrapperStyle = styled.div`
+  width: 100%;
+  ${flexCenter};
   .title-section {
     width: 100%;
     margin: 2.5rem 0;
