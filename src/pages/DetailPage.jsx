@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Header from "../components/common/Header/Header";
 import Footer from "../components/common/Footer/Footer";
-import DetailContent from "../components/Detail/DetailContent";
+import Detail from "../components/Detail/Detail";
 
 const DetailPage = () => {
   return (
@@ -11,10 +11,10 @@ const DetailPage = () => {
         isfix="true"
         widthper="80%"
         position=""
-        boxshadow="true"
+        boxshadow="0rem 0.1rem 0.5rem 0.1rem"
         minwidth="110rem"
       />
-      <DetailContent />
+      <Detail />
       <Footer widthper="80%" />
     </>
   );
