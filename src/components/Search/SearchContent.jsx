@@ -24,7 +24,7 @@ const WrapStyle = styled.section`
 
   .map-content {
     position: sticky;
-    top: 161.5px;
+    top: 159px;
     height: 76vh;
   }
 `;

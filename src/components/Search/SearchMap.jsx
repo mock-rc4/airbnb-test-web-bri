@@ -31,6 +31,7 @@ export default SearchMap;
 
 const WrapStyle = styled.section`
   width: 100%;
+
   .map {
     width: 100%;
     height: 76vh;

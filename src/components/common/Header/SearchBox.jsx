@@ -3,25 +3,20 @@ import styled from "styled-components";
 import { color, flexCenter } from "../styled";
 import { ReactComponent as Search } from "../../../svg/ic-search.svg";
 
-const SearchBox = ({ isFix }) => {
+const SearchBox = ({ isfix }) => {
   //local state
   const [openSearch, setOpenSearch] = useState(false);
 
-  //life cycle
-  useEffect(() => {
-    console.log(openSearch);
-  }, [openSearch]);
-
   return (
     <>
-      <WrapStyle isFix={isFix}>
-        <SearchBoxTextStyle isFix={isFix} openSearch={openSearch}>
+      <WrapStyle isfix={isfix}>
+        <SearchBoxTextStyle isfix={isfix} openSearch={openSearch}>
           <li>숙소</li>
           <li>체험</li>
           <li>온라인 체험</li>
         </SearchBoxTextStyle>
 
-        <SearchBoxStyle isFix={isFix} openSearch={openSearch}>
+        <SearchBoxStyle isfix={isfix} openSearch={openSearch}>
           <section className="location">
             <p>위치</p>
             <input type="text" placeholder="어디로 여행가세요?" />
@@ -52,7 +47,8 @@ const SearchBox = ({ isFix }) => {
 export default SearchBox;
 
 const WrapStyle = styled.div`
-  display: ${(props) => (props.isFix ? "none !important" : "")};
+  opacity: ${(props) => (props.isfix ? "0" : "1")};
+  pointer-events: ${(props) => (props.isfix ? "none" : "")};
   padding-top: 1rem;
   position: absolute;
   top: 0;
@@ -65,7 +61,7 @@ const WrapStyle = styled.div`
 
 const SearchBoxTextStyle = styled.ul`
   ${flexCenter};
-  color: ${(props) => (props.isFix ? `${color.black}` : "white")};
+  color: ${(props) => (props.isfix ? `${color.black}` : "white")};
   font-size: 16px;
   box-sizing: border-box;
   padding-bottom: 2rem;
@@ -73,9 +69,6 @@ const SearchBoxTextStyle = styled.ul`
   li {
     padding: 2rem;
     cursor: pointer;
-
-    &:hover {
-      color: blue;
     }
   }
 `;

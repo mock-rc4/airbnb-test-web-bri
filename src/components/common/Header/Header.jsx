@@ -10,12 +10,17 @@ import { ReactComponent as Hamburger } from "../../../svg/ic-hamburger.svg";
 import { ReactComponent as Profile } from "../../../svg/ic-profile.svg";
 import { ReactComponent as Search } from "../../../svg/ic-search.svg";
 
-const Header = ({ isFix, widthper }) => {
+const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
   //local state
+
   const [popupOpen, setPopupOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(isfix);
   const fixedRef = useRef();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setSearchOpen(isfix);
+  }, [isfix]);
   //function
   const handleClickPopup = useCallback(() => {
     setPopupOpen(!popupOpen);
@@ -25,10 +30,19 @@ const Header = ({ isFix, widthper }) => {
     navigate("/");
   };
 
+  const handleClickMini = () => {
+    setSearchOpen(false);
+  };
+
   return (
     <>
-      <BoxStyle ref={fixedRef} isFix={isFix}>
-        <HeadSectionStyle widthper={widthper}>
+      <BoxStyle
+        ref={fixedRef}
+        isfix={isfix}
+        position={position}
+        boxshadow={boxshadow}
+      >
+        <HeadSectionStyle widthper={widthper} minwidth={minwidth}>
           {popupOpen && (
             <SettingPopup
               popupOpen={popupOpen}
@@ -36,10 +50,10 @@ const Header = ({ isFix, widthper }) => {
             />
           )}
           <nav>
-            <LogoStyle isFix={isFix} onClick={handleGoMain} />
+            <LogoStyle isfix={isfix} onClick={handleGoMain} />
 
             <div className="header-middle">
-              <SearchMinimizeStyle isFix={isFix}>
+              <SearchMinimizeStyle isfix={isfix} onClick={handleClickMini}>
                 <span>검색 시작하기</span>
                 <button className="search-button">
                   <Search />
@@ -48,8 +62,13 @@ const Header = ({ isFix, widthper }) => {
             </div>
 
             <div className="header-right">
-              <BecomehostStyle isFix={isFix}>호스트 되기</BecomehostStyle>
-              <GlobalStyle isFix={isFix} />
+              <BecomehostStyle
+                isfix={isfix}
+                onClick={() => navigate("/hosting")}
+              >
+                호스트 되기
+              </BecomehostStyle>
+              <GlobalStyle isfix={isfix} />
               <button onClick={handleClickPopup}>
                 <HamburgerStyle />
                 <ProfileStyle />
@@ -57,9 +76,7 @@ const Header = ({ isFix, widthper }) => {
             </div>
           </nav>
         </HeadSectionStyle>
-        <div className="search-container">
-          <SearchBox isFix={isFix} />
-        </div>
+        <SearchBox isfix={searchOpen} />
       </BoxStyle>
     </>
   );
@@ -68,17 +85,17 @@ const Header = ({ isFix, widthper }) => {
 export default Header;
 
 const BoxStyle = styled.header`
+  box-shadow: ${(props) => props.boxshadow} ${color.light_gray2};
   z-index: 3;
   width: 100%;
   ${flexCenter}
-  background: ${(props) => (props.isFix ? "white" : `${color.black}`)};
-  z-index: 2;
-  position: sticky;
+  background: ${(props) => (props.isfix ? "white" : `${color.black}`)};
+  position: ${(props) => props.position};
   top: 0;
 `;
-
 const HeadSectionStyle = styled.div`
   width: ${(props) => props.widthper};
+  min-width: ${(props) => props.minwidth};
   ${flexCenter}
   flex-direction: column;
   position: relative;
@@ -122,13 +139,12 @@ const SearchMinimizeStyle = styled.div`
   box-sizing: border-box;
   border-radius: 50px;
   background: white;
-  //opacity: ${(props) => (props.isFix ? `1` : `0`)};
-  display: ${(props) => (props.isFix ? `block` : `none`)};
+  display: ${(props) => (props.isfix ? `flex` : `none`)};
   border: 1px solid ${color.medium_gray};
   box-shadow: 0rem 0.1rem 0.2rem 0.1rem ${color.light_gray2};
   cursor: pointer;
-  position: relative;
   padding: 1.7rem 2rem;
+  position: relative;
 
   span {
     font-size: 1.4rem;
@@ -152,23 +168,21 @@ const BecomehostStyle = styled.span`
   padding: 14px;
   border-radius: 25px;
   cursor: pointer;
-  color: ${(props) => (props.isFix ? `${color.black}` : "white")};
+  color: ${(props) => (props.isfix ? `${color.black}` : "white")};
   &:hover {
     background: ${(props) =>
-      props.isFix ? `${color.light_gray}` : `${color.dark_gray2}`};
+      props.isfix ? `${color.light_gray}` : `${color.dark_gray2}`};
   }
 `;
 
 const LogoStyle = styled(Logo)`
-  width: 100px;
-  height: fit-content;
   padding-top: 0.5rem;
   cursor: pointer;
-  fill: ${(props) => (props.isFix ? `${color.Main}` : "white")};
+  fill: ${(props) => (props.isfix ? `${color.Main}` : "white")};
 `;
 
 const GlobalStyle = styled(Global)`
-  fill: ${(props) => (props.isFix ? `${color.black}` : "white")};
+  fill: ${(props) => (props.isfix ? `${color.black}` : "white")};
   padding: 13px;
   width: 16px;
   border-radius: 20px;
@@ -176,7 +190,7 @@ const GlobalStyle = styled(Global)`
   cursor: pointer;
   &:hover {
     background: ${(props) =>
-      props.isFix ? `${color.light_gray}` : `${color.dark_gray2}`};
+      props.isfix ? `${color.light_gray}` : `${color.dark_gray2}`};
   }
 `;
 

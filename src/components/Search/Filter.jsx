@@ -65,7 +65,7 @@ const WrapStyle = styled.div`
   padding: 1.5rem 0;
   ${flexCenter};
   position: sticky;
-  top: 8.8rem;
+  top: 8.5rem;
   z-index: 1;
 `;
 
@@ -77,9 +77,9 @@ const BoxStyle = styled.div`
   .filter-section {
     display: flex;
     justify-content: space-between;
-    width: 14%;
+    width: 15%;
 
-    padding-right: 1.5rem;
+    padding-right: 1rem;
     border-right: 1px solid ${color.medium_gray};
     button {
       span {
@@ -88,10 +88,10 @@ const BoxStyle = styled.div`
     }
   }
   .detail-filter-section {
-    margin-left: 1.5rem;
+    margin-left: 1.3rem;
     display: flex;
     justify-content: space-between;
-    width: 87%;
+    width: 85%;
   }
 
   .filter-button {
@@ -102,7 +102,7 @@ const BoxStyle = styled.div`
   button {
     display: flex;
     color: ${color.dark_gray};
-    padding: 1.2rem 1.55rem;
+    padding: 1.2rem 1.5rem;
     border: 1px solid ${color.medium_gray};
     border-radius: 2rem;
     background: white;

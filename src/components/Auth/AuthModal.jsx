@@ -30,7 +30,9 @@ const AuthModal = ({ handleClickAuth }) => {
           <h3>로그인 또는 회원 가입</h3>
         </div>
         {toggleAuthMethod.method === "phone" && <AuthSection />}
-        {toggleAuthMethod.method === "email" && <AuthEmail />}
+        {toggleAuthMethod.method === "email" && (
+          <AuthEmail handleClickAuth={handleClickAuth} />
+        )}
         {/* <Signup /> */}
         <AuthSocial
           authMethod={toggleAuthMethod.text}

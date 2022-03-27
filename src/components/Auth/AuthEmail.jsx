@@ -1,13 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { authButton, color } from "../common/styled";
+import { authButton, color, authInput } from "../common/styled";
 import AuthSocial from "./AuthSocial";
 import axios from "axios";
 import UseApi from "../../hook/UseApi";
 import Signup from "./Signup";
+import { useDispatch } from "react-redux";
+import { inputUserIndex, isLogin } from "../../store/actions/login";
 // import { customAxios } from "../../custom/customAxios";
 
-const AuthEmail = () => {
+const AuthEmail = ({ handleClickAuth }) => {
+  //redux use
+  const dispatch = useDispatch();
+
   //local state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,14 +20,28 @@ const AuthEmail = () => {
   const [goSignup, setGoSignup] = useState(false);
   const [goPassword, setGoPassword] = useState(false);
 
-  //여기서 유효성 검사 해주고, 조건에 안맞으면 아예 안넘어가게 해버리자
+  const emailPattern =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  const colors = {
+    success: "black",
+    fail: "rgb(228, 56, 56)",
+  };
+
+  const [color, setColor] = useState(colors.success);
 
   const handleInputEmail = (e) => {
     const {
       target: { name, value },
     } = e;
-    if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
+    if (name === "email") {
+      setEmail(value);
+      //유효성 검사
+      if (!emailPattern.test(value)) {
+        setColor(colors.fail);
+      } else {
+        setColor(colors.success);
+      }
+    } else if (name === "password") setPassword(value);
   };
 
   const handleSignup = useCallback(() => {
@@ -42,7 +61,6 @@ const AuthEmail = () => {
         setGoSignup(true);
       } else if (res.data.code === 2017) {
         //이미 존재하는 이메일이면, 비밀번호 input 불러옴
-        console.log(res.data.message);
         setGoPassword(true);
       }
     } catch (e) {
@@ -59,7 +77,18 @@ const AuthEmail = () => {
         url: `app/users/log-in`,
         data: { userEmail: email, userPassword: password },
       });
-      console.log(`로그인 api 의 결과는 ${res}`);
+      console.log(res);
+      //로그인 성공하면 로그인 창 끄고, 리덕스에 유저 인덱스랑 로그인 상태값 넣어줌.
+      if (res.data.isSuccess) {
+        handleClickAuth();
+        dispatch(isLogin(true));
+        dispatch(inputUserIndex(res.data.result.userIdx));
+        localStorage.setItem("jwt", res.data.result.jwt);
+      }
+      //비밀번호가 틀렸을 때
+      else if (res.data.code === 3014) {
+        setColor(colors.fail);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -70,28 +99,38 @@ const AuthEmail = () => {
       <AuthSectionBoxStyle>
         <h2>에어비앤비에 오신 것을 환영합니다.</h2>
         <section className="auth-email">
-          {!goPassword && (
-            <input
-              name="email"
-              type="text"
-              placeholder="이메일"
-              onChange={handleInputEmail}
-            />
-          )}
+          <EmailInputStyle maincolor={color}>
+            {!goPassword && (
+              <>
+                <p>이메일</p>
+                <input
+                  name="email"
+                  type="text"
+                  onChange={handleInputEmail}
+                  placeholder="이메일"
+                />
+              </>
+            )}
+          </EmailInputStyle>
           {!goPassword && (
             <button className="emailOngoing" onClick={goPasswordApi}>
               계속
             </button>
           )}
           {/* 이부분을 말한거임 여기에  {}줘서 바꿔주기*/}
-          {goPassword && (
-            <input
-              name="password"
-              type="password"
-              placeholder="비밀번호"
-              onChange={handleInputEmail}
-            />
-          )}
+          <PasswordInputStyle maincolor={color}>
+            {goPassword && (
+              <>
+                <p>비밀번호</p>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="비밀번호"
+                  onChange={handleInputEmail}
+                />
+              </>
+            )}
+          </PasswordInputStyle>
           {goPassword && (
             <button className="emailOngoing" onClick={inLoginApi}>
               계속
@@ -125,18 +164,26 @@ const AuthSectionBoxStyle = styled.section`
 
   .auth-email {
     margin: 1rem 0;
-    input {
-      width: 100%;
-      box-sizing: border-box;
-      font-size: 16px;
-      padding: 1.8rem 1.2rem;
-      border: 1px solid ${color.medium_gray2};
-      border-radius: 9px;
-
-      &:focus {
-        outline: 1.5px solid ${color.black};
-        //padding: 2.4rem 1.2rem 1.2rem 1.2rem;
-      }
-    }
   }
 `;
+
+const EmailInputStyle = styled.div`
+  position: relative;
+  input {
+    ${authInput};
+    border: 1px solid ${(props) => props.maincolor};
+    &:focus {
+      outline: 1.5px solid ${(props) => props.maincolor};
+    }
+  }
+  p {
+    position: absolute;
+    color: ${(props) => props.maincolor};
+    font-size: 1.2rem;
+    font-weight: 700;
+    left: 1rem;
+    top: 30%;
+    transform: translateY(-50%);
+  }
+`;
+const PasswordInputStyle = styled(EmailInputStyle)``;
