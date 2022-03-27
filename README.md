@@ -75,7 +75,7 @@ fixed 됐을 때 구현 못함
 - [x] address 페이지 제작
 - [x] floor-plan 페이지 제작
 
-## 3.26
+## 3.27
 ### 호스팅 페이지
 - [x] name 페이지 제작
 - [x] content 페이지 제작
