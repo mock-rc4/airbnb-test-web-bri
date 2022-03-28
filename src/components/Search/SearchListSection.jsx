@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { flexCenter, color } from "../common/styled";
 import SearchItem from "./SearchItem";
@@ -6,6 +8,36 @@ import SearchItem from "./SearchItem";
 const SearchListSection = () => {
   //local state
   const [num, setNum] = useState(10);
+  const [datas, setDatas] = useState([]);
+
+  //redux 저장 값으로 뿌려주기
+  const searchInfo = useSelector((state) => state.searchHouseReducer);
+  const [loc, setLoc] = useState(searchInfo.location);
+  const [checkin, setCheckin] = useState(searchInfo.checkin);
+  const [checkout, setCheckout] = useState(searchInfo.checkout);
+  const [people, setPeople] = useState(searchInfo.people);
+  const [facility, setFacility] = useState("");
+
+  useEffect(() => {
+    search();
+  }, [searchInfo.location]);
+
+  //------------api------------------
+  const search = async () => {
+    try {
+      const res = await axios({
+        method: "get",
+        url: `app/houses?loc=${loc}&str=${checkin}&end=${checkout}&ppl=&facility=`,
+        baseURL: "http://joon-serverlab.shop/",
+      });
+      console.log(res);
+      setDatas(res.data.result);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //---------------------------------
+
   return (
     <>
       <WrapStyle>
@@ -23,14 +55,26 @@ const SearchListSection = () => {
           </div>
 
           <div className="item-section">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {datas.map((item, index) => (
+              <SearchItem
+                key={index}
+                houseImg={item.houseImg}
+                gu={item.gu}
+                bigType={item.bigType}
+                smallType={item.smallType}
+                houseName={item.houseName}
+                reviewStar={item.reviewStar}
+                reviewCount={item.reviewCount}
+                houseGuest={item.houseGuest}
+                houseBed={item.houseBed}
+                houseRoom={item.houseRoom}
+                houseBath={item.houseBath}
+                housePrice={item.housePrice}
+                totalPrice={item.totalPrice}
+              />
+            ))}
+            {/* 필요한거 : houseImg, gu, bigType, smallType, houseName, reviewStar, reviewCount, houseGuest, houseBed, houseRoom,ㄴhouseBath,  */}
+            {/* <SearchItem /> */}
           </div>
         </div>
       </WrapStyle>
