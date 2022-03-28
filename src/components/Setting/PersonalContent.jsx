@@ -45,7 +45,7 @@ const WrapperStyle = styled.div`
 
   .info {
     width: 100%;
-    ${flexCenter}
+    display: flex;
     justify-content: flex-end;
 
     .just-line {
