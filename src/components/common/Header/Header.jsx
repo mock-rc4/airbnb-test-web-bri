@@ -2,25 +2,35 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { flexCenter, color } from "../styled";
-import SearchBox from "./SearchBox";
 import SettingPopup from "./SettingPopup";
 import { ReactComponent as Logo } from "../../../svg/ic-logo.svg";
 import { ReactComponent as Global } from "../../../svg/ic-global.svg";
 import { ReactComponent as Hamburger } from "../../../svg/ic-hamburger.svg";
 import { ReactComponent as Profile } from "../../../svg/ic-profile.svg";
 import { ReactComponent as Search } from "../../../svg/ic-search.svg";
+import SearchText from "./SearchText";
+import SearchBar from "./SearchBar";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { openSearchBar } from "../../../store/actions/openSearchBar";
 
 const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
-  //local state
+  const dispatch = useDispatch();
+  const searchInfo = useSelector((state) => state.searchHouseReducer);
 
+  //local state
   const [popupOpen, setPopupOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(isfix);
   const fixedRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setSearchOpen(isfix);
+    if (isfix) {
+      dispatch(openSearchBar(false));
+    } else {
+      dispatch(openSearchBar(true));
+    }
   }, [isfix]);
+
   //function
   const handleClickPopup = useCallback(() => {
     setPopupOpen(!popupOpen);
@@ -31,7 +41,7 @@ const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
   };
 
   const handleClickMini = () => {
-    setSearchOpen(false);
+    dispatch(openSearchBar(true));
   };
 
   return (
@@ -54,7 +64,25 @@ const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
 
             <div className="header-middle">
               <SearchMinimizeStyle isfix={isfix} onClick={handleClickMini}>
-                <span>검색 시작하기</span>
+                <span>
+                  {searchInfo.location ? searchInfo.location : "지역"}
+                </span>
+                <span>
+                  {searchInfo.checkout
+                    ? `${searchInfo.checkin.slice(
+                        5,
+                        7
+                      )}월 ${searchInfo.checkin.slice(
+                        8,
+                        10
+                      )}일~${searchInfo.checkout.slice(8, 10)}일`
+                    : "날짜 선택"}
+                </span>
+                <span>
+                  {searchInfo.people
+                    ? `게스트 ${searchInfo.people} 명`
+                    : "인원"}
+                </span>
                 <button className="search-button">
                   <Search />
                 </button>
@@ -76,7 +104,8 @@ const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
             </div>
           </nav>
         </HeadSectionStyle>
-        <SearchBox isfix={searchOpen} />
+        <SearchText isfix={isfix} />
+        <SearchBar isfix={isfix} />
       </BoxStyle>
     </>
   );
@@ -135,20 +164,27 @@ const HeadSectionStyle = styled.div`
 `;
 
 const SearchMinimizeStyle = styled.div`
-  width: 30rem;
+  width: 35rem;
   box-sizing: border-box;
   border-radius: 50px;
   background: white;
-  display: ${(props) => (props.isfix ? `flex` : `none`)};
+  display: ${(props) => (props.isfix ? `grid` : `none`)};
+  grid-template-columns: 1fr 1.5fr 1fr 0.3fr;
   border: 1px solid ${color.medium_gray};
   box-shadow: 0rem 0.1rem 0.2rem 0.1rem ${color.light_gray2};
   cursor: pointer;
-  padding: 1.7rem 2rem;
+  padding: 1.2rem 1rem;
   position: relative;
 
   span {
+    text-align: center;
+    padding: 0.5rem 1rem;
     font-size: 1.4rem;
     font-weight: 450;
+    border-right: 1px solid ${color.medium_gray};
+    &:nth-child(3) {
+      border: none;
+    }
   }
 
   button {
