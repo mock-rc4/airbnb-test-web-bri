@@ -22,27 +22,57 @@ const ConfirmPage = () => {
   const [userName, setUserName] = useState("");
   const [big, setBig] = useState("");
   const [small, setSmall] = useState("");
+  const [addrIdx, setAddrIdx] = useState(houseInfo.address);
+  const [address, setAddress] = useState("");
+
+  console.log(addrIdx);
 
   //불러올 api: user 정보랑 주소 정보 불러서 houseinfo 랑 주소 같은거 뿌려줘.
 
   //------------------------api zone------------------------
   //1. user 정보
-  useEffect(async () => {
+  const userInformation = async () => {
     try {
       const res = await axios({
         baseURL: "http://joon-serverlab.shop/",
         method: "get",
         url: `app/users/${userIndex}`,
-        params: { userIdx: userIndex },
+        params: {
+          userIdx: userIndex,
+        },
       });
       //성공하면,
       setUserName(res.data.result.firstName);
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  };
 
   //2. 주소 정보 뿌려주는 api 생기면 할것
+  const addrInformation = async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/houses/show/address/${addrIdx}`,
+        params: {
+          addrIdx: addrIdx,
+        },
+      });
+      //성공하면,
+      setAddress(
+        `${res.data.result.country} ${res.data.result.city} ${res.data.result.gu} ${res.data.result.apt}`
+      );
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(async () => {
+    userInformation();
+    addrInformation();
+  }, []);
 
   //--------------------------------------------------------
 
@@ -77,6 +107,7 @@ const ConfirmPage = () => {
             <section className="subtitle">
               <h2>
                 {userName}님이 호스팅 하는<br></br> {big} {small}
+                <img src="/img/user.jpg" />
               </h2>
             </section>
             <section className="info">
@@ -88,7 +119,13 @@ const ConfirmPage = () => {
             <section className="content">
               <h3>{houseInfo.content}</h3>
             </section>
-            <section className="location">위치</section>
+            <section className="location">
+              <h3>위치</h3>
+              <p>{address}</p>
+              <span>
+                숙소 주소는 예약이 확정된 게스트에게만 공개되니 안심하세요.
+              </span>
+            </section>
           </div>
         </main>
         <DetailNav
@@ -154,9 +191,19 @@ const WrapperStyle = styled.main`
       font-weight: 550;
     }
     .subtitle {
+      font-weight: 500;
       font-size: 1.8rem;
       word-break: keep-all;
       line-height: 2.4rem;
+      position: relative;
+      img {
+        position: absolute;
+        right: 0;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4rem;
+      }
     }
     .info {
       font-size: 1.6rem;
@@ -170,8 +217,22 @@ const WrapperStyle = styled.main`
       color: ${color.dark_gray};
     }
     .location {
-      font-size: 1.6rem;
       word-break: keep-all;
+      h3 {
+        font-weight: 550;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+      }
+      p {
+        font-size: 1.6rem;
+        color: ${color.dark_gray2};
+        padding: 1rem 0;
+      }
+      span {
+        color: ${color.medium_gray2};
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+      }
     }
   }
 `;

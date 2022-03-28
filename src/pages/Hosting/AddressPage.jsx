@@ -246,7 +246,7 @@ const WrapperStyle = styled.main`
       padding: 1.5rem 2.5rem;
       color: white;
       font-size: 1.6rem;
-      margin-top: 6.5rem;
+      margin-top: 3.5rem;
       cursor: pointer;
     }
   }

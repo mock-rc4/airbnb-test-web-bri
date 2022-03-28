@@ -55,6 +55,10 @@ const PropertyTypePage = () => {
             별채
             <img src="https://a0.muscache.com/im/pictures/32897901-1870-4895-8e23-f08dc0e61750.jpg?im_w=240" />
           </ButtonStyle>
+          <ButtonStyle>
+            독특한 숙소
+            <img src="https://a0.muscache.com/im/pictures/7ad56bb1-ed9f-4dcb-a14c-2523da331b44.jpg?im_w=240" />
+          </ButtonStyle>
         </div>
         <DetailNav
           nextBtnAble={type}

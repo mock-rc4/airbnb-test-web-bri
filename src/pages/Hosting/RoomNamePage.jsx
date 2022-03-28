@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 const RoomNamePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const houseInfo = useSelector((state) => state.addHostingReducer);
   const [text, setText] = useState("");
   const [length, setLength] = useState(text.length);
 
@@ -45,7 +46,7 @@ const RoomNamePage = () => {
           <textarea
             rows="3"
             autoComplete="off"
-            placeholder="주소 받아와서 넣어줄게"
+            placeholder="숙소 이름을 작성해주세요"
             onChange={handleInputValue}
             value={text}
           ></textarea>
