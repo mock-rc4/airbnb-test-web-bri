@@ -64,6 +64,8 @@ const SearchListSection = () => {
               datas.map((item, index) => (
                 <SearchItem
                   key={index}
+                  hostIdx={item.hostIdx}
+                  houseIdx={item.houseIdx}
                   houseImg={item.houseImg}
                   gu={item.gu}
                   bigType={item.bigType}

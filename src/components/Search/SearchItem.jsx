@@ -3,8 +3,13 @@ import styled from "styled-components";
 import { color } from "../common/styled";
 import { ReactComponent as StarRating } from "../../svg/ic-star-rating.svg";
 import { ReactComponent as Heart } from "../../svg/ic-heart.svg";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { storeHouseIdx, storeHostIdx } from "../../store/actions/storeHouseIdx";
 
 const SearchItem = ({
+  houseIdx,
+  hostIdx,
   houseImg,
   gu,
   bigType,
@@ -21,6 +26,8 @@ const SearchItem = ({
 }) => {
   const [big, setBig] = useState(bigType);
   const [small, setSmall] = useState(smallType);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (bigType === "A") setBig("아파트");
@@ -37,9 +44,16 @@ const SearchItem = ({
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  //클릭시 데이터 넘겨줄 곳. 이 때 바로 리덕스 수정해줌
+  const handleClickRoom = () => {
+    navigate(`/detail/${houseIdx}`);
+    dispatch(storeHouseIdx(houseIdx));
+    dispatch(storeHostIdx(hostIdx));
+  };
+
   return (
     <>
-      <WrapStyle>
+      <WrapStyle onClick={handleClickRoom}>
         <ImgBox>
           <img src={houseImg} />
         </ImgBox>
