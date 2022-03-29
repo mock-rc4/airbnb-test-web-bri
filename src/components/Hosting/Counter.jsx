@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { color } from "../common/styled";
+import { color, flexCenter } from "../common/styled";
 import { ReactComponent as Minus } from "../../svg/ic-minus.svg";
 import { ReactComponent as Plus } from "../../svg/ic-plus.svg";
 
@@ -29,13 +29,13 @@ const Counter = ({ num }) => {
 
 export default Counter;
 const CounterStyle = styled.div`
-  display: flex;
-  align-items: center;
+  ${flexCenter}
 
   p {
     font-size: 1.6rem;
     width: 4rem;
     text-align: center;
+    padding-top: 4px;
   }
   button {
     border: 1px solid #aaaaaa;
