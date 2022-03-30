@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import "react-dates/initialize";
-import "react-dates/lib/css/_datepicker.css";
 import { DayPickerRangeController } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
 import "moment/locale/ko";
-import { addCheckIn, addCheckOut } from "../../store/actions/searchHouse";
+import {
+  addCheckIn,
+  addCheckOut,
+  addStayDay,
+} from "../../store/actions/searchHouse";
+import "../common/calender.css";
 
 const Calender = () => {
   moment.locale("ko");
@@ -20,12 +25,14 @@ const Calender = () => {
 
   //리덕스 값 저장
   const dispatch = useDispatch();
-  const [checkin, setCheckin] = useState("");
-  const [checkout, setCheckout] = useState("");
 
   useEffect(() => {
     if (startDate) dispatch(addCheckIn(startDate.format(`YYYY-MM-DD`)));
     if (endDate) dispatch(addCheckOut(endDate.format(`YYYY-MM-DD`)));
+    if (startDate && endDate)
+      dispatch(
+        addStayDay(startDate.format(`YYYY-MM-DD`), endDate.format(`YYYY-MM-DD`))
+      );
   }, [startDate, endDate]);
 
   return (
@@ -42,10 +49,6 @@ const Calender = () => {
   );
 };
 export default Calender;
-
-const PP = styled.input`
-  font-size: 5rem;
-`;
 
 {
   /* <PP value={startDate ? startDate.format(`MM월 DD일`) : "ddd"} />
