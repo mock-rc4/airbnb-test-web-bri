@@ -3,21 +3,34 @@ import styled from "styled-components";
 import { color, flexCenter } from "../styled";
 import { ReactComponent as Minus } from "../../../svg/ic-minus.svg";
 import { ReactComponent as Plus } from "../../../svg/ic-plus.svg";
-import { useDispatch } from "react-redux";
-import { addPeople } from "../../../store/actions/searchHouse";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addAdult,
+  addBaby,
+  addKid,
+  addPeople,
+  addPet,
+} from "../../../store/actions/searchHouse";
 
 const PeoplePop = () => {
   //리덕스 값 잇으면 보여주기
   const [history, setHistory] = useState(false);
-  const [adult, setAdult] = useState(0);
-  const [kid, setKid] = useState(0);
-  const [baby, setBaby] = useState(0);
-  const [pet, setPet] = useState(0);
+
   const dispatch = useDispatch();
+  const userNumInfo = useSelector((state) => state.searchHouseReducer);
+
+  const [adult, setAdult] = useState(userNumInfo.adult);
+  const [kid, setKid] = useState(userNumInfo.kid);
+  const [baby, setBaby] = useState(userNumInfo.baby);
+  const [pet, setPet] = useState(userNumInfo.pet);
 
   //생명주기
   useEffect(() => {
     dispatch(addPeople(adult + kid + baby));
+    dispatch(addAdult(adult));
+    dispatch(addKid(kid));
+    dispatch(addBaby(baby));
+    dispatch(addPet(pet));
   }, [adult, kid, baby, pet]);
 
   //함수

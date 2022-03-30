@@ -45,9 +45,16 @@ const SettingPopup = ({ handleClickPopup }) => {
           <ul className="isLogin-box">
             <li className="bold-text">메세지</li>
             <li className="bold-text">알림</li>
-            <li className="bold-text">여행</li>
-            <li className="bold-line-text">위시리스트</li>
-            <li>숙소관리</li>
+            <li onClick={() => navigate("/trip")} className="bold-text">
+              여행
+            </li>
+            <li
+              onClick={() => navigate("/wishlist")}
+              className="bold-line-text"
+            >
+              위시리스트
+            </li>
+            <li onClick={() => navigate("/management")}>숙소관리</li>
             <li onClick={() => navigate("/hosting")}>숙소 호스팅하기</li>
             <li onClick={() => navigate("/setting")} className="bottom-line">
               계정

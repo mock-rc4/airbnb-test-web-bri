@@ -23,8 +23,12 @@ const SearchBar = ({ isfix, open }) => {
 
   //리덕스 값 저장
   const isOpen = useSelector((state) => state.openSearchBarReducer);
-
   const searchInfo = useSelector((state) => state.searchHouseReducer);
+  const [people, setPeople] = useState(searchInfo.people);
+
+  useEffect(() => {
+    setPeople(searchInfo.people);
+  }, [searchInfo.people]);
 
   const handleClickReading = () => {
     navigate("/search");
@@ -98,7 +102,7 @@ const SearchBar = ({ isfix, open }) => {
               type="text"
               placeholder="게스트 추가"
               onClick={handleClickPop}
-              defaultValue={searchInfo.people}
+              defaultValue={`게스트 ${people}명`}
             />
             <button className="search-button" onClick={handleClickReading}>
               <Search />
@@ -156,14 +160,14 @@ const SearchBoxStyle = styled.div`
       font-weight: 800;
       margin-bottom: 5px;
       position: absolute;
-      top: 1.1rem;
-      left: 3.8rem;
+      top: 1.2rem;
+      left: 2.8rem;
     }
     input {
       width: 100%;
       height: 100%;
       border: none;
-      padding: 2.9rem 4rem 1.3rem 4rem;
+      padding: 2.9rem 3rem 1.3rem 3rem;
       border-radius: 5rem;
       margin-left: -2px;
       box-sizing: border-box;
