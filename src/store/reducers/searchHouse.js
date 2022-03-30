@@ -3,9 +3,24 @@ import {
   ADD_CHECKIN,
   ADD_CHECKOUT,
   ADD_PEOPLE,
+  ADD_STAYDAY,
+  ADD_ADULT,
+  ADD_KID,
+  ADD_BABY,
+  ADD_PET,
 } from "../actions/searchHouse";
 
-const initailState = "";
+const initailState = {
+  location: "",
+  checkin: "",
+  checkout: "",
+  people: 0,
+  adult: 0,
+  kid: 0,
+  baby: 0,
+  pet: 0,
+  stayDay: "",
+};
 
 export const searchHouseReducer = (state = initailState, action) => {
   switch (action.type) {
@@ -28,6 +43,36 @@ export const searchHouseReducer = (state = initailState, action) => {
       return {
         ...state,
         people: action.people,
+      };
+    case ADD_ADULT:
+      return {
+        ...state,
+        adult: action.adult,
+      };
+    case ADD_KID:
+      return {
+        ...state,
+        kid: action.kid,
+      };
+    case ADD_BABY:
+      return {
+        ...state,
+        baby: action.baby,
+      };
+    case ADD_PET:
+      return {
+        ...state,
+        pet: action.pet,
+      };
+    case ADD_STAYDAY:
+      return {
+        ...state,
+        stayDay:
+          (new Date(action.checkout) - new Date(action.checkin)) /
+          1000 /
+          60 /
+          60 /
+          24,
       };
     default:
       return state;
