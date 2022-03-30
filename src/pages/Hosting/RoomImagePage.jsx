@@ -107,7 +107,7 @@ const RoomImagePage = () => {
           </div>
         </main>
         <DetailNav
-          nextBtnAble="s"
+          nextBtnAble={previewURL}
           backPrev="/hosting/floorplan"
           goNext="/hosting/roomname"
         />

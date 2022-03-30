@@ -34,7 +34,7 @@ const ManagementPage = () => {
 
         <HouseManage />
       </main>
-      <Footer widthper="90%" />
+      <Footer widthper="80%" />
     </WrapperStyle>
   );
 };
@@ -67,7 +67,7 @@ const WrapperStyle = styled.div`
   .title-section {
     width: 100%;
 
-    padding 7rem;
+    padding 7rem 22rem;
     background: linear-gradient(270deg, rgb(240, 1, 126), rgb(60, 30, 150));
     h1{
       color: white;
@@ -110,7 +110,7 @@ const LogoStyle = styled(Logo)`
   fill: ${color.Main};
   position: absolute;
   top: 50%;
-  left: 2rem;
+  left: 5rem;
   cursor: pointer;
   transform: translateY(-50%);
 `;
