@@ -1,34 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { authButton, authInput, color } from "../common/styled";
 
 const BoxInfo = () => {
+  const navigate = useNavigate();
+
+  const searchInfo = useSelector((state) => state.searchHouseReducer);
+  const [checkin, setCheckin] = useState("");
+  const [checkout, setCheckout] = useState("");
+  const [people, setPeople] = useState("");
+  const dateInfo = useSelector((state) => state.searchHouseReducer);
+
+  //클릭시 나오는 팝업을 위한 state, function
+  const [isCalender, setIsCalender] = useState(false);
+  const [isPeople, setIsPeople] = useState(false);
+
+  useEffect(() => {
+    if (searchInfo.checkin)
+      setCheckin(
+        `${searchInfo.checkin.slice(5, 7)}월 ${searchInfo.checkin.slice(
+          8,
+          10
+        )}일`
+      );
+    if (searchInfo.checkout)
+      setCheckout(
+        `${searchInfo.checkout.slice(5, 7)}월 ${searchInfo.checkout.slice(
+          8,
+          10
+        )}일`
+      );
+    if (searchInfo.people) setPeople(`게스트 ${searchInfo.people}명`);
+  }, [searchInfo]);
+
   return (
     <WrapperStyle>
       <div className="title-text">
         <p>요금을 확인하려면 날짜를 입력하세요.</p>
-        <p>별점이랑 그런거</p>
       </div>
       <div className="chart">
         <div className="check-inout">
           <button>
             <p>체크인</p>
-            <p>날짜 추가</p>
+            <input placeholder="날짜추가" defaultValue={checkin} />
           </button>
           <button>
             <p>체크아웃</p>
-            <p>날짜 추가</p>
+            <input placeholder="날짜추가" defaultValue={checkout} />
           </button>
         </div>
         <div>
           <button className="guest">
             <p>인원</p>
-            <p>게스트 ? 명</p>
+            <input placeholder="게스트 1명" defaultValue={people} />
           </button>
         </div>
       </div>
-      <button className="reservation">예약 가능 여부 보기</button>
-      {/* 이 버튼도 결국 두개 만들어야함 */}
+      {dateInfo.stayDay ? (
+        <button className="reservation" onClick={() => navigate("/payment")}>
+          예약하기
+        </button>
+      ) : (
+        <button className="reservation">예약 가능 여부 보기</button>
+      )}
     </WrapperStyle>
   );
 };
@@ -43,11 +79,8 @@ const WrapperStyle = styled.div`
     p:nth-child(1) {
       font-size: 2.2rem;
       word-break: keep-all;
-      margin-bottom: 0.5rem;
+      margin-bottom: 2rem;
       line-height: 2.5rem;
-    }
-    p:nth-child(2) {
-      margin-bottom: 1.5rem;
     }
   }
 
@@ -87,9 +120,11 @@ const WrapperStyle = styled.div`
           font-weight: 800;
           padding-bottom: 0.5rem;
         }
-        & > p:nth-child(2) {
+        & > input {
           font-size: 1.4rem;
-          color: ${color.medium_gray2};
+          border: none;
+          color: ${color.dark_gray2};
+          font-weight: 500;
         }
       }
 
@@ -117,15 +152,18 @@ const WrapperStyle = styled.div`
         font-weight: 800;
         padding-bottom: 0.5rem;
       }
-      & > p:nth-child(2) {
+      & > input {
         font-size: 1.4rem;
-        color: ${color.medium_gray2};
+        border: none;
+        color: ${color.dark_gray2};
+        font-weight: 500;
       }
     }
   }
 
   .reservation {
     ${authButton};
+    margin-top: 2rem;
     margin-bottom: 0;
     &:active {
       background: ${color.Main};

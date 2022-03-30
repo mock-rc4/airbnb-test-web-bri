@@ -1,33 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { detailButton, flexCenter, color } from "../common/styled";
 import EachReview from "./EachReview";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { ReactComponent as Star } from "../../svg/ic-star.svg";
 
 const ReviewSection = ({ contentRef }) => {
-  //후기 관련 api 도 불러와야 함.
-  //1. 별점, 후기 갯수 api 새로 만들어서 여기서 그냥 컴포넌트를 불러오자
+  const [reviewCount, setReviewCount] = useState("");
+  const [starAvg, setStarAvg] = useState("");
+  const houseIdxInfo = useSelector((state) => state.storeHouseIdxReducer);
+  //후기
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    starInformationApi();
+    reviewInformationApi();
+  }, []);
+  //-----------api------------
+  //1.별점 api
+  const starInformationApi = async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/reserve/review/count?houseIdx=${houseIdxInfo.houseIdx}`,
+      });
+      setReviewCount(res.data.result.reviewCount);
+      setStarAvg(res.data.result.starAvg);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //2. 후기 불러오는 api
+  const reviewInformationApi = async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/reserve/review/${houseIdxInfo.houseIdx}`,
+      });
+      setReviews(res.data.result);
+      console.log(reviews);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //--------------------------
+
   return (
     <WrapperStyle ref={(el) => (contentRef.current[2] = el)}>
       <BoxStyle>
-        <h3>별점 • 후기 ()개</h3>
-        <section className="rating">
-          <div>
-            <span>d</span>
-          </div>
-          <div>
-            <span>d</span>
-          </div>
-          <div>
-            <span>d</span>
-          </div>
-        </section>
+        {reviews.length === 0 ? (
+          <h3>작성 리뷰가 없습니다.</h3>
+        ) : (
+          <h3>
+            <StarStyle />
+            별점 {starAvg} 점 • 후기 {reviewCount}개
+          </h3>
+        )}
+
         <section className="reviews">
           {/* 여기서 그냥 보여주는 방식으로 하자 */}
-          <EachReview />
-          <EachReview />
-          <EachReview />
+          {reviews.map((item, index) => (
+            <EachReview
+              key={index}
+              firstName={item.firstName}
+              reservationIdx={item.reservationIdx}
+              reviewContent={item.reviewContent}
+              startDate={item.startDate}
+              userImage={item.userImage}
+            />
+          ))}
         </section>
-        <button>후기 ( )개 모두 보기</button>
+        <button>후기 {reviewCount}개 모두 보기</button>
       </BoxStyle>
     </WrapperStyle>
   );
@@ -47,14 +94,8 @@ const BoxStyle = styled.div`
   h3 {
     font-size: 2.2rem;
     font-weight: 500;
-  }
-
-  .rating {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2rem;
-    font-size: 1.6rem;
-    padding: 2rem 0;
+    display: flex;
+    margin-bottom: 3rem;
   }
 
   .reviews {
@@ -65,4 +106,11 @@ const BoxStyle = styled.div`
   button {
     ${detailButton};
   }
+`;
+
+const StarStyle = styled(Star)`
+  transform: scale(1.2);
+  margin-right: 1rem;
+  padding-top: 2px;
+  fill: ${color.Main};
 `;

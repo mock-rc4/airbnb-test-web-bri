@@ -1,27 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { color, flexCenter } from "../common/styled";
 import { ReactComponent as Star } from "../../svg/ic-star.svg";
 import { ReactComponent as Heart } from "../../svg/ic-heart.svg";
 import { ReactComponent as Share } from "../../svg/ic-share.svg";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const DetailTitleSection = ({ contentRef }) => {
   //타이틀 섹션에서 필요한 state: 숙소이름, 별점-후기, 위치, 이미지
+  //houseIdx 저장되어 있는 값
+  const houseIdxInfo = useSelector((state) => state.storeHouseIdxReducer);
+  const [houseName, setHouseName] = useState("");
+  const [houseImg, setHouseImg] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [gu, setGu] = useState("");
+
+  const [reviewCount, setReviewCount] = useState("");
+  const [starAvg, setStarAvg] = useState("");
+
+  useEffect(() => {
+    houseInformationApi();
+    starInformationApi();
+  }, []);
+
+  //--------------------------api---------------------------
+  //1. 숙소 정보
+  const houseInformationApi = async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/houses/by-house/${houseIdxInfo.houseIdx}`,
+        params: { houseIdx: houseIdxInfo.houseIdx },
+      });
+
+      setHouseName(res.data.result[0].houseName);
+      setHouseImg(res.data.result[0].houseImg);
+      setCountry(res.data.result[0].country);
+      setCity(res.data.result[0].city);
+      setGu(res.data.result[0].gu);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //2.별점 api
+  const starInformationApi = async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/reserve/review/count?houseIdx=${houseIdxInfo.houseIdx}`,
+      });
+      setReviewCount(res.data.result.reviewCount);
+      setStarAvg(res.data.result.starAvg);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //--------------------------------------------------------
 
   //api 가져오기.
   return (
     <WrapperStyle ref={(el) => (contentRef.current[0] = el)}>
       <BoxStyle>
         <section className="title-section">
-          <h2>숙소이름</h2>
+          <h2>{houseName}</h2>
           <div className="title-subtext-section">
             <div className="title-subtext-left">
               <span className="star-rate">
                 <StarStyle />
-                5.0(게산값)
+                {starAvg}
               </span>
-              <span className="review">후기 n개</span>
-              <span className="location">위치</span>
+              <span className="review">후기 {reviewCount}개</span>
+              <span className="location">
+                {country} {city} {gu}
+              </span>
             </div>
 
             <div className="title-subtext-right">
@@ -37,7 +94,7 @@ const DetailTitleSection = ({ contentRef }) => {
           </div>
         </section>
         <section className="image-section">
-          <img src="/img/aboutHostingImage.jpg" alt="숙소 이미지" />
+          <img src={houseImg} alt="숙소 이미지" />
         </section>
       </BoxStyle>
     </WrapperStyle>
@@ -83,10 +140,6 @@ const WrapperStyle = styled.div`
         .star-rate {
           ${flexCenter};
           font-weight: 600;
-        }
-
-        .review {
-          text-decoration: underline;
         }
 
         .location {

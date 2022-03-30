@@ -1,16 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { flexCenter, color, detailButton } from "../common/styled";
 import { ReactComponent as Safe } from "../../svg/ic-safepay.svg";
 import { ReactComponent as Star } from "../../svg/ic-star.svg";
 import { ReactComponent as SuperHost } from "../../svg/ic-superhost-detail.svg";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
 const HostSection = () => {
   //글자수 제한 함수 만들기
   const [limit, setLimit] = useState(180);
   //임시 텍스트임
   const [text, setText] = useState(
-    "안녕하세요. 저는 금융 전문가로 활동하고 있는 재식입니다. 저는 호텔 베딩에 대한 전문 자격을 소지하여, 숙소를 가장 편안하고 청결하게 관리합니다 :) 저는 여러 나라를 여행하는 것을 매우 사랑하고, 새로운 경험을 하는 것을 즐깁니다. 한국을 여행하시는 분들께 최고의 공간과 퀄리티를 보장하는 숙소를 제공하고 싶습니다. 게스트 분들이 깨끗하고 아늑한 공간에서 좋은 시간을 보내신다면 저 또한 행복할 것 같습니다 :) 저희 숙소에 머무는 동안 내 집 같은 편안함을 느끼시고, 사랑스러운 인상 받으실 수 있을 것입니다. 청결한 공간, 사랑스러운 공간, 편리한 공간과 시설이 당신을 기다립니다. Hi. I am “Jae-sik” as a financial expert.. I have a professional qualification in hotel bedding, which makes my accommodation the most comfortable and clean. I love traveling very much and enjoying new experiences. I would like to offer accommodation that guarantees the best space and quality for those traveling in Korea. Would not it be more enjoyable if you spend a good time in a clean and cozy place? During your stay you will be able to enjoy the comfort"
+    "안녕하세요. 저는 금융 전문가로 활동하고 있습니다. 저는 호텔 베딩에 대한 전문 자격을 소지하여, 숙소를 가장 편안하고 청결하게 관리합니다 :) 저는 여러 나라를 여행하는 것을 매우 사랑하고, 새로운 경험을 하는 것을 즐깁니다. 한국을 여행하시는 분들께 최고의 공간과 퀄리티를 보장하는 숙소를 제공하고 싶습니다. 게스트 분들이 깨끗하고 아늑한 공간에서 좋은 시간을 보내신다면 저 또한 행복할 것 같습니다 :) 저희 숙소에 머무는 동안 내 집 같은 편안함을 느끼시고, 사랑스러운 인상 받으실 수 있을 것입니다. 청결한 공간, 사랑스러운 공간, 편리한 공간과 시설이 당신을 기다립니다. Hi. I am “Jae-sik” as a financial expert.. I have a professional qualification in hotel bedding, which makes my accommodation the most comfortable and clean. I love traveling very much and enjoying new experiences. I would like to offer accommodation that guarantees the best space and quality for those traveling in Korea. Would not it be more enjoyable if you spend a good time in a clean and cozy place? During your stay you will be able to enjoy the comfort"
   );
+  const houseIdxInfo = useSelector((state) => state.storeHouseIdxReducer);
+
+  //host
+  const [hostName, setHostName] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
+  const [reviewCount, setReviewCount] = useState("");
+  const [isSuper, setIsSuper] = useState("");
+  const [hostIntroduce, setHostIntroduce] = useState("");
+  const [responseRate, setResponseRate] = useState("");
+  const [hostImg, setHostImg] = useState("");
+
+  useEffect(async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/users/${houseIdxInfo.hostIdx}`,
+        params: { houseIdx: houseIdxInfo.hostIdx },
+      });
+      setHostName(res.data.result.firstName);
+      setCreatedAt(res.data.result.createdAt);
+      setReviewCount(res.data.result.reviewCount);
+      setHostIntroduce(res.data.result.hostIntroduce);
+      setResponseRate(res.data.result.responseRate);
+      setIsSuper(res.data.result.isSuper);
+      //setHostImg(res.data.result.hostImg);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   //function
   const moreView = (str, limit) => {
@@ -24,24 +57,35 @@ const HostSection = () => {
     setLimit(str.length);
   };
 
+  const onErrorImg = (e) => {
+    e.target.src =
+      "https://a0.muscache.com/im/pictures/user/bd59d9d7-1baf-412e-845e-6ef59504e881.jpg?im_w=240";
+  };
+
   return (
     <WrapperStyle>
       <BoxStyle>
         <div className="title">
-          <img src="" alt="호스트 사진" />
+          <img src={hostImg} alt="호스트 사진" onError={onErrorImg} />
           <div>
-            <h3>호스트: (호스트이름)님</h3>
-            <p>회원 가입일: (회원가입일)</p>
+            <h3>호스트: {hostName}님</h3>
+            <p>
+              회원 가입일:{" "}
+              {`${createdAt.slice(0, 4)}년 ${createdAt.slice(5, 7)}월`}
+            </p>
           </div>
         </div>
         <div className="host-content">
           <div className="host-info-left">
             <div className="host-review-section">
               <StarStyle />
-              <span>후기 ( )개</span>
-              {/* 슈퍼호스트면 보여주자 && 로 */}
-              <SuperHostStyle />
-              <span>슈퍼호스트</span>
+              <span>후기 {reviewCount}개</span>
+              {isSuper === "A" && (
+                <>
+                  <SuperHostStyle />
+                  <span>슈퍼호스트</span>
+                </>
+              )}
             </div>
             <div className="host-information">
               {moreView(text, limit).string}
@@ -51,18 +95,19 @@ const HostSection = () => {
                 </span>
               )}
             </div>
-            {/* 이부분도  슈퍼호스트면 보여주자 && 로 - 위랑 동일*/}
-            <div className="is-superhost">
-              <p>( )님은 슈퍼호스트입니다.</p>
-              <span>
-                슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며 게스트가
-                숙소에서 편안히 머무를 수 있도록 최선을 다하는 호스트입니다.
-              </span>
-            </div>
+            {isSuper === "A" && (
+              <div className="is-superhost">
+                <p>{hostName}님은 슈퍼호스트입니다.</p>
+                <span>
+                  슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며 게스트가
+                  숙소에서 편안히 머무를 수 있도록 최선을 다하는 호스트입니다.
+                </span>
+              </div>
+            )}
           </div>
           <div className="host-info-right">
             <p>언어: 中文 (简体), English, 日本語, 한국어</p>
-            <p>응답률: ( )%</p>
+            <p>응답률: {responseRate}%</p>
             <p>응답 시간: 1시간 이내</p>
             <button>호스트에게 연락하기</button>
             <div className="safety-pay">
@@ -100,7 +145,6 @@ const BoxStyle = styled.div`
     align-items: center;
 
     img {
-      border: 1px solid black;
       border-radius: 50%;
       width: 65px;
       height: 65px;

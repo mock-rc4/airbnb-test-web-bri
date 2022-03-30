@@ -1,9 +1,32 @@
 //체크인 시간 props 로 넘겨야함
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { flexCenter, color } from "../common/styled";
 
 const NoticeSection = ({ checkin, checkout }) => {
+  const [notices, setNotices] = useState([]);
+  const houseInfo = useSelector((state) => state.storeHouseIdxReducer);
+
+  useEffect(() => {
+    rulesInformationApi();
+  }, []);
+
+  const rulesInformationApi = async () => {
+    try {
+      const res = await axios({
+        baseURL: "http://joon-serverlab.shop/",
+        method: "get",
+        url: `app/houses/show/rules/${houseInfo.houseIdx}`,
+      });
+      setNotices(res.data.result);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <WrapperStyle>
       <BoxStyle>
@@ -16,9 +39,10 @@ const NoticeSection = ({ checkin, checkout }) => {
               <p>체크아웃 시간: 오전 11:00</p>
               <p>열쇠 보관함(으)로 셀프 체크인</p>
               <p>유아(만 2세 미만)에게 적합하지 않음</p>
-              <p>흡연 금지</p>
-              <p>반려동물 동반 불가</p>
-              <p>파티나 이벤트 금지</p>
+              {notices &&
+                notices.map((item, index) => (
+                  <p key={index}>{item.optionName}</p>
+                ))}
             </div>
           </div>
           <div>

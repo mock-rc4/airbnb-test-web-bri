@@ -12,7 +12,7 @@ const ReservationBox = () => {
         {/* 여기 부분에 title 넣고? 바뀌니까 */}
         <BoxInfo />
         {/* 이 가운데 버튼 넣고 하는게 나을수도 */}
-        <BoxPrice />
+        <BoxPrice infotext={true} />
       </div>
       <button className="report">
         <Report />

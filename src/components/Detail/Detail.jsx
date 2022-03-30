@@ -7,6 +7,7 @@ import LocationSection from "./LocationSection";
 import ReviewSection from "./ReviewSection";
 import NoticeSection from "./NoticeSection";
 import HostSection from "./HostSection";
+import { useSelector } from "react-redux";
 
 const Detail = () => {
   //api 가져와서 props 여기저기 넘겨줘여함.....
