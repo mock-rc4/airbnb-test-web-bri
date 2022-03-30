@@ -51,6 +51,7 @@ const House = ({
         },
       });
       console.log(res);
+      if (res.isSuccess) alert("숙소가 삭제되었습니다.");
     } catch (e) {
       console.log(e);
     }
@@ -121,7 +122,7 @@ const House = ({
 export default House;
 
 const WrapperStyle = styled.section`
-  width: 65%;
+  width: 100%;
   border: 1px solid ${color.medium_gray};
   border-radius: 1rem;
   padding: 2rem;
@@ -132,7 +133,7 @@ const WrapperStyle = styled.section`
     position: relative;
     img {
       width: 30rem;
-      height: 16rem;
+      height: 18rem;
       border-radius: 1rem;
       margin-right: 2rem;
     }
@@ -142,24 +143,26 @@ const WrapperStyle = styled.section`
       position: relative;
       input {
         font-size: 2.2rem;
-        padding: 0.5rem 1rem;
+        padding: 1rem;
         font-weight: 500;
+        outline: 1px solid ${color.medium_gray};
         border: none;
-        border-radius: 2rem;
+        border-radius: 1rem;
         &:focus {
           outline: 1px solid ${color.medium_gray};
         }
       }
       button {
         position: absolute;
-        right: -5rem;
+        right: -8rem;
         top: 50%;
         transform: translateY(-50%);
-        background: white;
+        background: black;
+        color: white;
         border: 1px solid ${color.medium_gray};
-        border-radius: 3rem;
-        padding: 7px 10px;
-        font-size: 1.4rem;
+        border-radius: 1rem;
+        padding: 1.3rem 2rem;
+        font-size: 1.6rem;
         cursor: pointer;
         &:hover {
           background: ${color.light_gray};
@@ -171,6 +174,7 @@ const WrapperStyle = styled.section`
   .info-first {
     display: flex;
     line-height: 2rem;
+    margin-bottom: 1rem;
   }
   .type {
     font-size: 1.4rem;
@@ -187,7 +191,7 @@ const WrapperStyle = styled.section`
     font-size: 1.3rem;
     font-weight: 500;
     color: ${color.dark_gray};
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   .price {
@@ -199,7 +203,7 @@ const WrapperStyle = styled.section`
   .time {
     line-height: 2rem;
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 500;
   }
   .delete {
     background: none;

@@ -79,7 +79,7 @@ const HouseManage = () => {
 export default HouseManage;
 
 const WrapperStyle = styled.section`
-  width: 90%;
+  width: 70%;
 
   padding: 5rem 0;
   h2 {
