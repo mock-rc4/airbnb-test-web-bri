@@ -22,6 +22,7 @@ import PaymentPage from "../pages/PaymentPage";
 import TripPage from "../pages/TripPage";
 import ManagementPage from "../pages/ManagementPage";
 import ReservationPage from "../pages/ReservationPage";
+import WishListPage from "../pages/WishListPage";
 
 const RootRoute = () => {
   return (
@@ -49,6 +50,8 @@ const RootRoute = () => {
         {/* trip(예약확인) */}
         <Route path="/trip" element={<TripPage />} />
         {/* wishlist */}
+        <Route path="/wishlist" element={<WishListPage />} />
+        {/* management*/}
         <Route path="/management" element={<ManagementPage />} />
         {/* setting */}
         <Route path="/setting" element={<SettingPage />} />
