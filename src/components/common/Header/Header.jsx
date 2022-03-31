@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { flexCenter, color } from "../styled";
+import { flexCenter, color, deviceSize } from "../styled";
 import SettingPopup from "./SettingPopup";
 import { ReactComponent as Logo } from "../../../svg/ic-logo.svg";
 import { ReactComponent as Global } from "../../../svg/ic-global.svg";
@@ -53,6 +53,8 @@ const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
         boxshadow={boxshadow}
       >
         <HeadSectionStyle widthper={widthper} minwidth={minwidth}>
+          <button className="interactive">어디로 여행가세요?</button>
+
           {popupOpen && (
             <SettingPopup
               popupOpen={popupOpen}
@@ -122,6 +124,22 @@ const BoxStyle = styled.header`
   background: ${(props) => (props.isfix ? "white" : `${color.black}`)};
   position: ${(props) => props.position};
   top: 0;
+
+  .interactive {
+    color: white;
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    color: black;
+    display: none;
+    font-weight: 500;
+    font-size: 1.4rem;
+    @media ${deviceSize.mobile} {
+      display: block;
+    }
+  }
 `;
 const HeadSectionStyle = styled.div`
   width: ${(props) => props.widthper};
@@ -135,6 +153,9 @@ const HeadSectionStyle = styled.div`
     grid-template-columns: repeat(3, 1fr);
     padding: 1.8rem 0;
     width: 100%;
+    @media ${deviceSize.mobile} {
+      display: none;
+    }
 
     .header-middle{
       ${flexCenter};
@@ -160,6 +181,7 @@ const HeadSectionStyle = styled.div`
           transition: box-shadow 0.3s;
         }
       }
+
     }
   
 `;
@@ -216,6 +238,9 @@ const LogoStyle = styled(Logo)`
   padding-top: 0.5rem;
   cursor: pointer;
   fill: ${(props) => (props.isfix ? `${color.Main}` : "white")};
+  @media ${deviceSize.mobile} {
+    display: none;
+  }
 `;
 
 const GlobalStyle = styled(Global)`

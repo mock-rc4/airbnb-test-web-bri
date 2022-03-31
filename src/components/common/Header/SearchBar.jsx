@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { color, flexCenter } from "../styled";
+import { color, deviceSize, flexCenter } from "../styled";
 import { ReactComponent as Search } from "../../../svg/ic-search.svg";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -133,6 +133,13 @@ const WrapperStyle = styled.div`
   & > div {
     width: 85rem;
     position: relative;
+  }
+  @media ${deviceSize.tablet} {
+    top: 13rem;
+    width: 90vw;
+  }
+  @media ${deviceSize.mobile} {
+    display: none;
   }
 `;
 

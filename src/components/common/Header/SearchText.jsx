@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { flexCenter, color } from "../styled";
+import { flexCenter, color, deviceSize } from "../styled";
 
 const SearchText = ({ isfix }) => {
   const isOpen = useSelector((state) => state.openSearchBarReducer);
@@ -33,5 +33,12 @@ const SearchBoxTextStyle = styled.ul`
     padding: 3.5rem 2rem;
     cursor: pointer;
     }
+  }
+
+  @media ${deviceSize.tablet}{
+    top:5rem;
+  }
+  @media ${deviceSize.mobile} {
+    display: none;
   }
 `;
