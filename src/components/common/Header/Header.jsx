@@ -127,6 +127,7 @@ const BoxStyle = styled.header`
 
   .interactive {
     color: white;
+    background: white;
     width: 100%;
     text-align: center;
     border: none;
