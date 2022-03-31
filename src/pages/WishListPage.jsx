@@ -22,7 +22,6 @@ const WishListPage = () => {
         url: `app/houses/wish-list/${userInfo.userIdx}`,
       });
       setItems(res.data.result);
-      console.log(res);
     } catch (e) {
       console.log(e);
     }
