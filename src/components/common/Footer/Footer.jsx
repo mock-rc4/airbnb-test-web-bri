@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color, flexCenter } from "../styled";
+import { color, deviceSize, flexCenter } from "../styled";
 import FooterSection from "./FooterSection";
 import { ReactComponent as Global } from "../../../svg/ic-global.svg";
 import { ReactComponent as Facebook } from "../../../svg/ic-facebook.svg";
@@ -78,16 +78,22 @@ const BoxFooter = styled.footer`
   display: flex;
   flex-direction: column;
   width: ${(props) => props.widthper};
-  min-width: 115rem;
+
   .bottom-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media ${deviceSize.tablet} {
+      display: block;
+    }
   }
   .box-footer-navigation {
     display: flex;
     padding: 4.8rem 0;
     border-bottom: 1px solid ${color.medium_gray};
+    @media ${deviceSize.tablet} {
+      display: block;
+    }
   }
   .box-footer-information {
     display: flex;
@@ -132,6 +138,9 @@ const BoxFooter = styled.footer`
 
     .sns {
       display: flex;
+      @media ${deviceSize.tablet} {
+        margin-bottom: 2rem;
+      }
       a {
         width: 18px;
         margin-left: 2rem;

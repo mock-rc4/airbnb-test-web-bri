@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { color } from "../styled";
+import { color, deviceSize } from "../styled";
 
 const FooterSection = ({ title }) => {
   //Global state 선언
@@ -51,11 +51,13 @@ const FooterSection = ({ title }) => {
       <div>
         <h3>{title}</h3>
       </div>
-      {list.map((item, index) => (
-        <ul key={index}>
-          <li>{item}</li>
-        </ul>
-      ))}
+      <div className="text">
+        {list.map((item, index) => (
+          <ul key={index}>
+            <li>{item}</li>
+          </ul>
+        ))}
+      </div>
     </SectionStyle>
   );
 };
@@ -69,6 +71,18 @@ const SectionStyle = styled.section`
 
   h3 {
     font-weight: bold;
+  }
+  .text {
+    @media ${deviceSize.tablet} {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 1.5rem 0;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid ${color.medium_gray};
+    }
+    @media ${deviceSize.mobile} {
+      display: block;
+    }
   }
 
   ul > li {
