@@ -1,5 +1,6 @@
 //1. 액션 타입 설정
 export const IS_LOGIN = "login/IS_LOGIN";
+export const IS_LOGOUT = "login/IS_LOGOUT";
 export const INPUT_USERINDEX = "login/INPUT_USERINDEX";
 
 //2. 액션 생성함수

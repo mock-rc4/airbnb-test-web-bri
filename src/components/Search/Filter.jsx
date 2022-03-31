@@ -3,9 +3,14 @@ import styled from "styled-components";
 import { check, color, flexCenter } from "../common/styled";
 import { ReactComponent as DropIcon } from "../../svg/ic-dropdown.svg";
 import { ReactComponent as FilterIcon } from "../../svg/ic-filter.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { filterKeyword } from "../../store/actions/filter";
 
 const Filter = () => {
   const [filterList, setFilterList] = useState(["요금", "숙소 유형"]);
+  const dispatch = useDispatch();
+  const keyword = useSelector((state) => state.filterReducer);
+  const [border, setBorder] = useState(false);
 
   const [detailList, setDetailList] = useState([
     "취소 수수료 없음",
@@ -24,7 +29,8 @@ const Filter = () => {
   //function: filter click
   //button에 value 값을 주고 출력하게 함. 나중에 filter 에 쓰일 예정
   const handleClickFilter = (e) => {
-    console.log(e.target.value);
+    dispatch(filterKeyword(e.target.value));
+    setBorder(true);
   };
 
   return (
@@ -33,23 +39,28 @@ const Filter = () => {
         <BoxStyle>
           <div className="filter-section">
             {filterList.map((item) => (
-              <button key={item}>
+              <ButtonStyle key={item}>
                 <span>{item}</span>
                 <DropIcon />
-              </button>
+              </ButtonStyle>
             ))}
           </div>
 
           <div className="detail-filter-section">
             {detailList.map((item) => (
-              <button onClick={handleClickFilter} key={item} value={item}>
+              <ButtonStyle
+                onClick={handleClickFilter}
+                key={item}
+                value={item}
+                border={border}
+              >
                 {item}
-              </button>
+              </ButtonStyle>
             ))}
-            <button className="filter-button">
+            <ButtonStyle className="filter-button">
               <FilterIcon />
               <span>필터</span>
-            </button>
+            </ButtonStyle>
           </div>
         </BoxStyle>
       </WrapStyle>
@@ -99,18 +110,18 @@ const BoxStyle = styled.div`
       margin-left: 5px;
     }
   }
-  button {
-    display: flex;
-    color: ${color.dark_gray};
-    padding: 1.2rem 1.5rem;
-    border: 1px solid ${color.medium_gray};
-    border-radius: 2rem;
-    background: white;
-    font-size: 14px;
-    font-weight: 350;
+`;
 
-    &:hover {
-      border: 1px solid ${color.black};
-    }
+const ButtonStyle = styled.button`
+  display: flex;
+  color: ${color.dark_gray};
+  padding: 1.2rem 1.5rem;
+  border: 1px solid ${color.medium_gray};
+  border-radius: 2rem;
+  background: white;
+  font-size: 14px;
+  font-weight: 350;
+  &:hover {
+    border: 1px solid ${color.black};
   }
 `;

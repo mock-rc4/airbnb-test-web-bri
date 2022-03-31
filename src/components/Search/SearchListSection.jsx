@@ -23,9 +23,16 @@ const SearchListSection = () => {
   const [page, setPage] = useState(1); //현재 페이지
   const offset = (page - 1) * limit; //시작 인덱스 계산
 
+  //필터링 관련 state
+  const keyword = useSelector((state) => state.filterReducer);
+
   useEffect(() => {
     search();
   }, [searchInfo.location]);
+
+  useEffect(() => {
+    reSearch();
+  }, [keyword]);
 
   //------------api------------------
   //1. 하우스 정보
@@ -41,6 +48,21 @@ const SearchListSection = () => {
       console.log(e);
     }
   };
+
+  //2. 필터로 재검색
+  const reSearch = async () => {
+    try {
+      const res = await axios({
+        method: "get",
+        url: `app/houses/filter?loc=${loc}&str=${checkin}&end=${checkout}&ppl=${people}&facility=${keyword.keyword}`,
+        baseURL: "http://joon-serverlab.shop/",
+      });
+      setDatas(res.data.result);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   //---------------------------------
 
   return (
@@ -63,7 +85,7 @@ const SearchListSection = () => {
           </div>
 
           <div className="item-section">
-            {datas.length === 0 ? (
+            {!datas ? (
               <p className="non-search">검색 결과가 없습니다.</p>
             ) : (
               datas
@@ -89,7 +111,7 @@ const SearchListSection = () => {
                   />
                 ))
             )}
-            {datas.length !== 0 && (
+            {datas && (
               <>
                 <Pagination
                   total={datas.length}
