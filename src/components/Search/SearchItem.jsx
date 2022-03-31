@@ -5,6 +5,7 @@ import { ReactComponent as StarRating } from "../../svg/ic-star-rating.svg";
 import { ReactComponent as Heart } from "../../svg/ic-heart.svg";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 import { storeHouseIdx, storeHostIdx } from "../../store/actions/storeHouseIdx";
 
 const SearchItem = ({
@@ -30,6 +31,7 @@ const SearchItem = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    review();
     if (bigType === "A") setBig("아파트");
     if (bigType === "H") setBig("주택");
     if (bigType === "N") setBig("별채");
@@ -51,13 +53,32 @@ const SearchItem = ({
     dispatch(storeHostIdx(hostIdx));
   };
 
+  const handleClickWish = () => {
+    console.log(`위시 ${houseIdx}번 누름`);
+    dispatch(storeHouseIdx(houseIdx));
+    //모달창 켜줌
+  };
+
+  //api
+  const review = async () => {
+    try {
+      const res = await axios({
+        method: "get",
+        url: `app/reserve/review/count?houseIdx=${houseIdx}`,
+        baseURL: "http://joon-serverlab.shop/",
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <>
-      <WrapStyle onClick={handleClickRoom}>
-        <ImgBox>
+      <WrapStyle>
+        <ImgBox onClick={handleClickRoom}>
           <img src={houseImg} />
         </ImgBox>
-        <TextBox>
+        <TextBox onClick={handleClickRoom}>
           <div className="info-text">
             <p>
               {gu}의 {big} {small}
@@ -82,8 +103,8 @@ const SearchItem = ({
               <span>총액 ₩{comma(totalPrice)}</span>
             </div>
           </div>
-          <HeartStyle />
         </TextBox>
+        <HeartStyle onClick={handleClickWish} />
       </WrapStyle>
     </>
   );
@@ -96,6 +117,7 @@ const WrapStyle = styled.div`
   display: grid;
   grid-template-columns: 30rem auto;
   cursor: pointer;
+  position: relative;
 `;
 
 const ImgBox = styled.div`
@@ -190,7 +212,7 @@ const HeartStyle = styled(Heart)`
   border-radius: 50%;
   padding: 1rem;
   position: absolute;
-  top: -1rem;
+  top: 0rem;
   right: -1rem;
 
   &:hover {

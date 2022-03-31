@@ -23,14 +23,14 @@ const SearchListSection = () => {
   }, [searchInfo.location]);
 
   //------------api------------------
+  //1. 하우스 정보
   const search = async () => {
     try {
       const res = await axios({
         method: "get",
-        url: `app/houses?loc=${loc}&str=${checkin}&end=${checkout}&ppl=&facility=`,
+        url: `app/houses?loc=${loc}&str=${checkin}&end=${checkout}&ppl=${people}&facility=`,
         baseURL: "http://joon-serverlab.shop/",
       });
-      console.log(res);
       setDatas(res.data.result);
     } catch (e) {
       console.log(e);
