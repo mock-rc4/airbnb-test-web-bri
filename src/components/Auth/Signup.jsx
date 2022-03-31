@@ -106,7 +106,11 @@ const Signup = ({ handleSignup, email }) => {
         },
       });
       console.log(res);
-      if (res.data.code === 2026 || res.data.code === 2025) {
+      if (
+        res.data.code === 2027 ||
+        res.data.code === 2026 ||
+        res.data.code === 2025
+      ) {
         //이름
         setNameError({ message: res.data.message, color: colors.fail });
       } else if (res.data.code === 2035) {
