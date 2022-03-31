@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { authButton, authInput, color } from "../common/styled";
+import CalenderPop from "./CalenderPop";
+import PeoplePop from "./PeoplePop";
 
 const BoxInfo = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const BoxInfo = () => {
   const [people, setPeople] = useState("");
   const dateInfo = useSelector((state) => state.searchHouseReducer);
 
-  //클릭시 나오는 팝업을 위한 state, function
+  //클릭시 나오는 팝업을 위한 state
   const [isCalender, setIsCalender] = useState(false);
   const [isPeople, setIsPeople] = useState(false);
 
@@ -35,13 +37,24 @@ const BoxInfo = () => {
     if (searchInfo.people) setPeople(`게스트 ${searchInfo.people}명`);
   }, [searchInfo]);
 
+  //팝업 함수
+  const handleClickCalender = () => {
+    setIsCalender(!isCalender);
+  };
+
+  const handleClickPeople = () => {
+    setIsPeople(!isPeople);
+  };
+
   return (
     <WrapperStyle>
+      {isCalender && <CalenderPop handleClickCalender={handleClickCalender} />}
+      {isPeople && <PeoplePop handleClickPeople={handleClickPeople} />}
       <div className="title-text">
         <p>요금을 확인하려면 날짜를 입력하세요.</p>
       </div>
       <div className="chart">
-        <div className="check-inout">
+        <div className="check-inout" onClick={handleClickCalender}>
           <button>
             <p>체크인</p>
             <input placeholder="날짜추가" defaultValue={checkin} />
@@ -52,7 +65,7 @@ const BoxInfo = () => {
           </button>
         </div>
         <div>
-          <button className="guest">
+          <button className="guest" onClick={handleClickPeople}>
             <p>인원</p>
             <input placeholder="게스트 1명" defaultValue={people} />
           </button>
@@ -91,6 +104,7 @@ const WrapperStyle = styled.div`
     overflow: hidden;
     width: 100%;
     .check-inout {
+      cursor: pointer;
       width: 100%;
       border-bottom: 1px solid black;
       border: none;
