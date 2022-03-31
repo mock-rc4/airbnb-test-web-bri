@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Pagination from "../common/Pagination";
 import { flexCenter, color } from "../common/styled";
 import SearchItem from "./SearchItem";
 
@@ -18,7 +19,13 @@ const SearchListSection = () => {
   const [people, setPeople] = useState(searchInfo.people);
   const [facility, setFacility] = useState("");
 
+  //페이지네이션 관련 state
+  const [limit, setLimit] = useState(6); // 한페이지에 보여줄 갯수
+  const [page, setPage] = useState(1); //현재 페이지
+  const offset = (page - 1) * limit; //시작 인덱스 계산
+
   useEffect(() => {
+    console.log(datas);
     search();
   }, [searchInfo.location]);
 
@@ -58,33 +65,53 @@ const SearchListSection = () => {
           </div>
 
           <div className="item-section">
-            {!datas ? (
+            {datas.length === 0 ? (
               <p className="non-search">검색 결과가 없습니다.</p>
             ) : (
-              datas.map((item, index) => (
-                <SearchItem
-                  key={index}
-                  hostIdx={item.hostIdx}
-                  houseIdx={item.houseIdx}
-                  houseImg={item.houseImg}
-                  gu={item.gu}
-                  bigType={item.bigType}
-                  smallType={item.smallType}
-                  houseName={item.houseName}
-                  reviewStar={item.reviewStar}
-                  reviewCount={item.reviewCount}
-                  houseGuest={item.houseGuest}
-                  houseBed={item.houseBed}
-                  houseRoom={item.houseRoom}
-                  houseBath={item.houseBath}
-                  housePrice={item.housePrice}
-                  totalPrice={item.totalPrice}
-                />
-              ))
+              datas
+                .slice(offset, offset + limit)
+                .map((item, index) => (
+                  <SearchItem
+                    key={index}
+                    hostIdx={item.hostIdx}
+                    houseIdx={item.houseIdx}
+                    houseImg={item.houseImg}
+                    gu={item.gu}
+                    bigType={item.bigType}
+                    smallType={item.smallType}
+                    houseName={item.houseName}
+                    reviewStar={item.reviewStar}
+                    reviewCount={item.reviewCount}
+                    houseGuest={item.houseGuest}
+                    houseBed={item.houseBed}
+                    houseRoom={item.houseRoom}
+                    houseBath={item.houseBath}
+                    housePrice={item.housePrice}
+                    totalPrice={item.totalPrice}
+                  />
+                ))
             )}
-
-            {/* 필요한거 : houseImg, gu, bigType, smallType, houseName, reviewStar, reviewCount, houseGuest, houseBed, houseRoom,ㄴhouseBath,  */}
+            {datas.length !== 0 && (
+              <>
+                <Pagination
+                  total={datas.length}
+                  limit={limit}
+                  page={page}
+                  setPage={setPage}
+                />
+                <p className="notice">
+                  총 {datas.length}개의 숙소중 {offset + 1} ~ {limit + offset}{" "}
+                  번째
+                </p>
+                <p className="small-notice">
+                  전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고
+                  세금이 추가될 수 있습니다.
+                </p>
+              </>
+            )}
           </div>
+
+          {/* 필요한거 : houseImg, gu, bigType, smallType, houseName, reviewStar, reviewCount, houseGuest, houseBed, houseRoom,ㄴhouseBath,  */}
         </div>
       </WrapStyle>
     </>
@@ -119,11 +146,26 @@ const WrapStyle = styled.section`
   }
 
   .item-section {
+    margin-bottom: 4rem;
     .non-search {
       text-align: center;
       font-size: 1.6rem;
       color: ${color.medium_gray2};
       margin-top: 10rem;
     }
+  }
+
+  .notice {
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    color: ${color.dark_gray};
+    margin-bottom: 4rem;
+  }
+  .small-notice {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: ${color.medium_gray2};
   }
 `;
