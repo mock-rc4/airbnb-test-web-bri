@@ -28,6 +28,7 @@ const SearchBar = ({ isfix, open }) => {
 
   useEffect(() => {
     setPeople(searchInfo.people);
+    console.log(searchInfo.people);
   }, [searchInfo.people]);
 
   const handleClickReading = () => {
@@ -102,7 +103,8 @@ const SearchBar = ({ isfix, open }) => {
               type="text"
               placeholder="게스트 추가"
               onClick={handleClickPop}
-              defaultValue={`게스트 ${people}명`}
+              value={`게스트 ${searchInfo.people}명`}
+              readOnly={true}
             />
             <button className="search-button" onClick={handleClickReading}>
               <Search />
