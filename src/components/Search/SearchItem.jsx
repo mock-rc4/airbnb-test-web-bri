@@ -228,8 +228,15 @@ const HeartStyle = styled(Heart)`
   position: absolute;
   top: 0rem;
   right: -1rem;
-
+  fill: white;
+  stroke: black;
   &:hover {
     background: ${color.light_gray};
+  }
+  &:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+    fill: ${color.Main};
+    stroke: none;
   }
 `;
