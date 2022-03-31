@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { flexCenter, color, mainTitle } from "../common/styled";
+import { flexCenter, color, mainTitle, deviceSize } from "../common/styled";
 import IdeaBox from "./IdeaBox";
 
 const Idea = () => {
@@ -69,12 +69,28 @@ const BoxStyle = styled.section`
 
     h2 {
       ${mainTitle}
+      @media ${deviceSize.tablet} {
+        font-size: 3.1rem;
+      }
+      @media ${deviceSize.mobile} {
+        font-size: 2.8rem;
+      }
     }
 
     .idea-cardbox {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 2rem;
+      @media ${deviceSize.tablet} {
+        overflow-x: scroll;
+      }
+      @media ${deviceSize.mobile} {
+        overflow-x: scroll;
+      }
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 `;

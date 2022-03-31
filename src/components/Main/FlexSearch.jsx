@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color, flexCenter } from "../common/styled";
+import { color, deviceSize, flexCenter } from "../common/styled";
 
 const FlexSearch = () => {
   return (
@@ -41,9 +41,15 @@ const BoxStyle = styled.section`
       flex-direction: column;
       p {
         color: white;
-        font-size: 3.8rem;
+        font-size: 4.5rem;
         font-weight: 450;
         margin-bottom: 2rem;
+        padding: 0 6rem;
+        word-break: keep-all;
+        @media ${deviceSize.tablet} {
+          text-align: center;
+          font-size: 3.6rem;
+        }
       }
       button {
         background: white;
