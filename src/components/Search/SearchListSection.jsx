@@ -8,7 +8,6 @@ import SearchItem from "./SearchItem";
 
 const SearchListSection = () => {
   //local state
-  const [num, setNum] = useState(10);
   const [datas, setDatas] = useState([]);
 
   //redux 저장 값으로 뿌려주기
@@ -25,7 +24,6 @@ const SearchListSection = () => {
   const offset = (page - 1) * limit; //시작 인덱스 계산
 
   useEffect(() => {
-    console.log(datas);
     search();
   }, [searchInfo.location]);
 

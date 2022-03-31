@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { storeHouseIdx, storeHostIdx } from "../../store/actions/storeHouseIdx";
+import WishPopup from "../WishList/WishPopup";
 
 const SearchItem = ({
   houseIdx,
@@ -29,6 +30,7 @@ const SearchItem = ({
   const [small, setSmall] = useState(smallType);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [wishPop, setWishPop] = useState(false);
 
   useEffect(() => {
     review();
@@ -53,10 +55,8 @@ const SearchItem = ({
     dispatch(storeHostIdx(hostIdx));
   };
 
-  const handleClickWish = () => {
-    console.log(`위시 ${houseIdx}번 누름`);
-    dispatch(storeHouseIdx(houseIdx));
-    //모달창 켜줌
+  const handleClosePop = () => {
+    setWishPop(!wishPop);
   };
 
   //api
@@ -75,6 +75,20 @@ const SearchItem = ({
   return (
     <>
       <WrapStyle>
+        {/* 위시 */}
+        {wishPop && (
+          <WishPopup
+            handleClosePop={handleClosePop}
+            houseImg={houseImg}
+            houseName={houseName}
+            houseIdx={houseIdx}
+            houseGuest={houseGuest}
+            houseBed={houseBed}
+            houseRoom={houseRoom}
+            houseBath={houseBath}
+          />
+        )}
+
         <ImgBox onClick={handleClickRoom}>
           <img src={houseImg} />
         </ImgBox>
@@ -104,7 +118,7 @@ const SearchItem = ({
             </div>
           </div>
         </TextBox>
-        <HeartStyle onClick={handleClickWish} />
+        <HeartStyle onClick={handleClosePop} />
       </WrapStyle>
     </>
   );
