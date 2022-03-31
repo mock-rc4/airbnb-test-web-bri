@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { flexCenter, color, authInput } from "../common/styled";
 import AuthSocial from "./AuthSocial";
 import { authButton } from "../common/styled";
+import { ReactComponent as DownArrow } from "../../svg/ic-downarrow.svg";
 
 const AuthSection = () => {
   //global state
@@ -13,7 +14,9 @@ const AuthSection = () => {
   return (
     <AuthSectionBoxStyle>
       <h2>에어비앤비에 오신 것을 환영합니다.</h2>
+
       <section className="auth-phone">
+        <DownArrowStyle />
         <div>
           <p className="country-text">국가/지역</p>
           <select name="nation">
@@ -23,7 +26,10 @@ const AuthSection = () => {
           </select>
 
           {/* <input type="text" /> */}
-          <input type="text" placeholder="전화번호" />
+          <InputStyle>
+            <p className="country-text">전화번호</p>
+            <input type="text" placeholder="전화번호" />
+          </InputStyle>
         </div>
         <p>
           전화나 문자로 전화번호를 확인하겠습니다. 일반 문자 메시지 요금 및
@@ -65,15 +71,15 @@ const AuthSectionBoxStyle = styled.section`
       border-radius: 10px;
       overflow: hidden;
       margin-top: 10px;
+      position: relative;
     }
 
     .country-text {
       position: absolute;
-      top: 8.7rem;
-      left: 3.4rem;
-      color: ${color.medium_gray2};
-
+      top: 2px;
+      left: 1rem;
       z-index: 10;
+      color: ${color.medium_gray2};
     }
 
     select {
@@ -82,6 +88,7 @@ const AuthSectionBoxStyle = styled.section`
       border: none;
       border-bottom: 1px solid ${color.medium_gray2};
       font-size: 1.6rem;
+      -webkit-appearance: none;
       color: ${color.dark_gray2};
       box-sizing: border-box;
       position: relative;
@@ -115,4 +122,21 @@ const AuthSectionBoxStyle = styled.section`
       ${authButton};
     }
   }
+`;
+
+const InputStyle = styled.div`
+  position: relative;
+  p {
+    position: absolute;
+    top: 1px;
+    left: 1rem;
+    font-size: 1.2rem;
+  }
+`;
+
+const DownArrowStyle = styled(DownArrow)`
+  position: absolute;
+  right: 3.5rem;
+  top: 10rem;
+  z-index: 10;
 `;

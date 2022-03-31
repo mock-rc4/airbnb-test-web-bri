@@ -246,6 +246,8 @@ const WrapperStyle = styled.div`
     padding: 3rem 0;
     border-bottom: 1px solid ${color.medium_gray};
     font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: ${color.dark_gray2};
   }
 
   .room-location {

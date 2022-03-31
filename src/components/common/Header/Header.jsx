@@ -104,6 +104,7 @@ const Header = ({ isfix, widthper, position, boxshadow, minwidth }) => {
             </div>
           </nav>
         </HeadSectionStyle>
+
         <SearchText isfix={isfix} />
         <SearchBar isfix={isfix} />
       </BoxStyle>
