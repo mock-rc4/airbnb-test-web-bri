@@ -23,6 +23,9 @@ const BoxStyle = styled.section`
   ${flexCenter};
   padding-bottom: 9.6rem;
   padding-top: 15rem;
+  @media ${deviceSize.mobile} {
+    padding-top: 5rem;
+  }
 
   .ukraine-box {
     position: relative;

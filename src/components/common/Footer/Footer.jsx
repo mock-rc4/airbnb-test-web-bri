@@ -42,7 +42,7 @@ const Footer = ({ widthper }) => {
               </span>
             </div>
             <div className="sns">
-              <a href="https://www.facebook.com/AirbnbKorea">
+              <a href="https://www.facebook.com/AirbnbKorea" target="_blank">
                 <Facebook />
               </a>
               <a href="https://twitter.com/airbnb">
