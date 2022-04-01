@@ -114,7 +114,6 @@ export const hostingButton = css`
     width: 5.5rem;
     border-radius: 0.5rem;
   }
-
   &:hover {
     outline: 1.5px solid ${color.black};
   }

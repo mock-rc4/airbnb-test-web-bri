@@ -124,7 +124,6 @@ const BoxStyle = styled.header`
   background: ${(props) => (props.isfix ? "white" : `${color.black}`)};
   position: ${(props) => props.position};
   top: 0;
-
   .interactive {
     color: white;
     background: white;
@@ -167,7 +166,6 @@ const HeadSectionStyle = styled.div`
       ${flexCenter}
       justify-content:flex-end;
       box-sizing: border-box;
-
       & > button {
         border: none;
         border-radius: 30px;
@@ -176,13 +174,11 @@ const HeadSectionStyle = styled.div`
         cursor: pointer;
         background: white;
         border: 1px solid ${color.light_gray2};
-
         &:hover{
           box-shadow: 0rem 0.2rem 0.2rem 0.1rem ${color.medium_gray};
           transition: box-shadow 0.3s;
         }
       }
-
     }
   
 `;
@@ -199,7 +195,6 @@ const SearchMinimizeStyle = styled.div`
   cursor: pointer;
   padding: 1.2rem 1rem;
   position: relative;
-
   span {
     text-align: center;
     padding: 0.5rem 1rem;
@@ -210,7 +205,6 @@ const SearchMinimizeStyle = styled.div`
       border: none;
     }
   }
-
   button {
     position: absolute;
     top: 50%;
