@@ -125,6 +125,3 @@ export const deviceSize = {
   mobile: "screen and (max-width:768px)",
   tablet: "screen and (max-width: 1050px)",
 };
-// mobile: "screen and (max-width: 500px)";
-// tablet: "screen and (max-width: 768px)";
-// element: "screen and (max-width: 1050px)";
