@@ -103,7 +103,6 @@ const PopupBoxStyle = styled.div`
       box-sizing: border-box;
       color: ${color.dark_gray};
     }
-
     .bold-text {
       color: ${color.black};
       font-weight: 600;
