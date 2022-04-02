@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../components/common/Footer/Footer";
 import Experience from "../components/Main/Experience";
@@ -11,11 +11,38 @@ import Header from "../components/common/Header/Header";
 import SettingPopup from "../components/common/Header/SettingPopup";
 
 const MainPage = () => {
+  //local state
+  const [scrollY, setScrollY] = useState(window.scrollY);
+  const [isfix, setIsFix] = useState(false);
+
+  //life cycle
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollY]);
+
+  //스크롤 관여 함수
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+    if (scrollY > 50) {
+      setIsFix(true);
+    } else {
+      setIsFix(false);
+    }
+  };
+
   return (
     <>
       <CoronaText />
-      <Header />
-
+      <Header
+        isfix={isfix}
+        boxshadow=""
+        widthper="90%"
+        position="sticky"
+        minwidth=""
+      />
       <main>
         <Ukraine />
         <FlexSearch />
@@ -23,7 +50,7 @@ const MainPage = () => {
         <Experience />
         <AboutHosting />
       </main>
-      <Footer />
+      <Footer widthper="90%" />
     </>
   );
 };

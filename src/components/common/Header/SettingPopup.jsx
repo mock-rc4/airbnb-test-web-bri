@@ -1,28 +1,80 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { inputUserIndex, isLogin } from "../../../store/actions/login";
 import AuthModal from "../../Auth/AuthModal";
+import Signup from "../../Auth/Signup";
 import { color } from "../styled";
 
 const SettingPopup = ({ handleClickPopup }) => {
-  //global state
+  //navigator
+  const navigate = useNavigate();
+
+  //redux use
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state.loginReducer);
+  console.log(selector.loginState);
+
   //local state
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const popupRef = useRef();
+
   //life cycle
+
   //funciton
   const handleClickAuth = useCallback(() => {
     setIsModalOpen(!isModalOpen);
   }, [isModalOpen]);
+
+  //로그아웃 funciton
+  const handleClickLogOut = () => {
+    dispatch(isLogin(false));
+    dispatch(inputUserIndex(""));
+    localStorage.removeItem("jwt");
+    handleClickPopup();
+  };
+
   return (
     <>
       {isModalOpen && <AuthModal handleClickAuth={handleClickAuth} />}
+      {/* {isModalOpen && <Signup handleClickAuth={handleClickAuth} />} */}
       <PopupBoxStyle>
-        <ul className="isLogin-box">
-          <li onClick={handleClickAuth}>회원 가입</li>
-          <li onClick={handleClickAuth}>로그인</li>
-          <li>숙소 호스트 되기</li>
-          <li>체험 호스팅하기</li>
-          <li>도움말</li>
-        </ul>
+        {selector.loginState ? (
+          <ul className="isLogin-box">
+            <li className="bold-text">메세지</li>
+            <li className="bold-text">알림</li>
+            <li onClick={() => navigate("/trip")} className="bold-text">
+              여행
+            </li>
+            <li
+              onClick={() => navigate("/wishlist")}
+              className="bold-line-text"
+            >
+              위시리스트
+            </li>
+            <li onClick={() => navigate("/management")}>숙소관리</li>
+            <li onClick={() => navigate("/hosting")}>숙소 호스팅하기</li>
+            <li onClick={() => navigate("/setting")} className="bottom-line">
+              계정
+            </li>
+            <li>도움말</li>
+            <li onClick={handleClickLogOut}>로그아웃</li>
+          </ul>
+        ) : (
+          <ul className="isLogin-box">
+            <li onClick={handleClickAuth} className="bold-text">
+              회원 가입
+            </li>
+            <li onClick={handleClickAuth} className="bottom-line">
+              로그인
+            </li>
+            <li>숙소 호스트 되기</li>
+            <li>체험 호스팅하기</li>
+            <li>도움말</li>
+          </ul>
+        )}
       </PopupBoxStyle>
     </>
   );
@@ -31,8 +83,7 @@ const SettingPopup = ({ handleClickPopup }) => {
 export default SettingPopup;
 
 const PopupBoxStyle = styled.div`
-  // 반응형으로 크기가 줄어들지 않는 부분은 Px 로 지정함.
-  width: 230px;
+  width: 23rem;
   height: fit-content;
   border-radius: 1rem;
   overflow: hidden;
@@ -41,7 +92,7 @@ const PopupBoxStyle = styled.div`
   top: 70px;
   background: white;
   z-index: 5;
-  box-shadow: 0.2rem 0rem 0.2rem 0.4rem rgba(9, 9, 9, 0.1);
+  box-shadow: 0rem 0rem 0.2rem 0.2rem rgba(9, 9, 9, 0.1);
   ul {
     overflow: hidden;
     li {
@@ -52,11 +103,16 @@ const PopupBoxStyle = styled.div`
       box-sizing: border-box;
       color: ${color.dark_gray};
     }
-    li:nth-child(1) {
+    .bold-text {
       color: ${color.black};
-      font-weight: 500;
+      font-weight: 600;
     }
-    li:nth-child(2) {
+    .bottom-line {
+      border-bottom: 1px solid ${color.medium_gray};
+    }
+    .bold-line-text {
+      color: ${color.black};
+      font-weight: 600;
       border-bottom: 1px solid ${color.medium_gray};
     }
     li:hover {

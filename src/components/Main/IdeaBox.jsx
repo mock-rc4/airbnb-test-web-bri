@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { deviceSize } from "../common/styled";
 
 const IdeaBox = ({ location, distance, image, background }) => {
   //전역 state
@@ -30,6 +31,13 @@ const BoxStyle = styled.section`
   img {
     width: 100%;
     margin-bottom: -2px;
+  }
+
+  @media ${deviceSize.tablet} {
+    width: 33vw;
+  }
+  @media ${deviceSize.mobile} {
+    width: 40vw;
   }
 `;
 

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { color, flexCenter } from "../common/styled";
+import { color, deviceSize, flexCenter } from "../common/styled";
 
 const Ukraine = () => {
   return (
@@ -22,7 +22,10 @@ const BoxStyle = styled.section`
   background: ${color.black};
   ${flexCenter};
   padding-bottom: 9.6rem;
-  padding-top: 17rem;
+  padding-top: 15rem;
+  @media ${deviceSize.mobile} {
+    padding-top: 5rem;
+  }
 
   .ukraine-box {
     position: relative;
@@ -34,12 +37,22 @@ const BoxStyle = styled.section`
     background: ${color.Main};
 
     p {
-      padding: 0 10rem;
+      padding: 0 8rem;
       color: white;
-      font-size: 3.8rem;
+      font-size: 4.8rem;
       font-weight: 450;
+      text-align: center;
+      line-height: 5.5rem;
       margin-bottom: 2rem;
       word-break: keep-all;
+      @media ${deviceSize.tablet} {
+        font-size: 3.6rem;
+        line-height: 5rem;
+      }
+      @media ${deviceSize.mobile} {
+        font-size: 3.2rem;
+        line-height: 4rem;
+      }
     }
     button {
       padding: 1rem 1.5rem;
