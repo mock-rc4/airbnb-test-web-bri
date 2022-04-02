@@ -156,11 +156,9 @@ const HeadSectionStyle = styled.div`
     @media ${deviceSize.mobile} {
       display: none;
     }
-
     .header-middle{
       ${flexCenter};
     }
-
     .header-right {
       color: white;
       ${flexCenter}
@@ -206,7 +204,7 @@ const SearchMinimizeStyle = styled.div`
     }
   }
   button {
-    position: qabsolute;
+    position: absolute;
     top: 50%;
     right: 0.7rem;
     transform: translate(0%, -50%);
