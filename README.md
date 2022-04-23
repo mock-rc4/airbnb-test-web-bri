@@ -1,57 +1,6 @@
 # 에어비엔비 : 라이징 테스트
 
-## 0. 메인페이지
-![image](https://user-images.githubusercontent.com/41052126/164878462-4ad4ee48-d657-4f6d-8dd4-d048c8dd7e29.png)
-![image](https://user-images.githubusercontent.com/41052126/164878488-e9d4f6c6-6dda-47d2-96c6-ae1a159b44ca.png)
-![image](https://user-images.githubusercontent.com/41052126/164878477-c003b089-416a-4eb9-b68b-8d915cbe8cfb.png)
-![image](https://user-images.githubusercontent.com/41052126/164878500-172a0b79-d666-4eb8-9ff9-0a447b270333.png)
-<img width="257" alt="image" src="https://user-images.githubusercontent.com/41052126/164878514-4d43dd30-3057-4925-be7f-e597c35096c0.png">
-
-## 1. 유저정보관련 페이지
-### 1-1. 로그인
-![image](https://user-images.githubusercontent.com/41052126/164878505-5a840176-fdc5-4ca3-aa68-c5e9539c605e.png)
-
-### 1-2. 회원가입
-<img width="277" alt="image" src="https://user-images.githubusercontent.com/41052126/164878515-cab1aaa0-93bd-4135-ad02-59eea2122600.png">
-
-### 1-3. 회원정보 수정
-<img width="277" alt="image" src="https://user-images.githubusercontent.com/41052126/164878517-5cdc180c-513e-4859-b9cd-fd1f67b155d3.png">
-<img width="265" alt="image" src="https://user-images.githubusercontent.com/41052126/164878522-2934a883-a548-4baa-a298-6be7efda8500.png">
-
-## 2. 숙소 검색 및 상세페이지
-<img width="443" alt="image" src="https://user-images.githubusercontent.com/41052126/164878528-b852c1e5-de3a-4838-8941-3b20606170c3.png">
-![image](https://user-images.githubusercontent.com/41052126/164878673-e074b8e7-99f1-4dc2-8a42-ce8147b8ef2d.png)
-<img width="454" alt="image" src="https://user-images.githubusercontent.com/41052126/164878545-f16edba8-b7f1-4ca1-b348-5a94c04996a7.png">
-![image](https://user-images.githubusercontent.com/41052126/164878687-297ee215-dc32-4b5f-b55d-bc065807420b.png)
-![image](https://user-images.githubusercontent.com/41052126/164878705-a8658f69-d362-4841-8789-83dcbe193c89.png)
-
-## 3. 숙소 예약 및 확인
-<img width="335" alt="image" src="https://user-images.githubusercontent.com/41052126/164878645-84b78674-7c85-4181-908e-714746851ac8.png">
-<img width="311" alt="image" src="https://user-images.githubusercontent.com/41052126/164878648-768418f2-1c5d-4920-b44a-ed908a62af68.png">
-<img width="452" alt="image" src="https://user-images.githubusercontent.com/41052126/164878652-6ad1e129-bc3b-474f-bb8b-73722426a7ea.png">
-
-## 4. 숙소 호스팅
-<img width="288" alt="image" src="https://user-images.githubusercontent.com/41052126/164878552-d269fedc-02b8-4f96-a495-fa561578b81c.png">
-![image](https://user-images.githubusercontent.com/41052126/164878571-3e233f3a-f1ec-4e98-bdaf-d75fd1336a2c.png)
-![image](https://user-images.githubusercontent.com/41052126/164878575-24259a1c-68ce-4248-b9ba-824a8818461c.png)
-![image](https://user-images.githubusercontent.com/41052126/164878587-6f97a967-b6ef-43a3-801d-d3c547388b7c.png)
-![image](https://user-images.githubusercontent.com/41052126/164878594-35debdd6-c760-4c80-a3d3-7acae4d8dfb2.png)
-![image](https://user-images.githubusercontent.com/41052126/164878609-5b7c5226-1a45-48bf-be61-a1ce746f91a9.png)
-![image](https://user-images.githubusercontent.com/41052126/164878615-2b3b0784-c738-4c46-900a-5e3e249a139b.png)
-![image](https://user-images.githubusercontent.com/41052126/164878621-8a1c43fe-2dcf-4780-a338-1d240b7254e3.png)
-![image](https://user-images.githubusercontent.com/41052126/164878626-99528320-332f-48b7-91cd-628002070a56.png)
-![image](https://user-images.githubusercontent.com/41052126/164878629-f8cd4ed0-3fee-4dc8-b056-96fec9a01a68.png)
-![image](https://user-images.githubusercontent.com/41052126/164878638-be3ff865-2190-4bbb-b69f-e7133c70e63d.png)
-
-## 5. 위시리스트
-<img width="391" alt="image" src="https://user-images.githubusercontent.com/41052126/164878718-8d6802fe-f4be-4417-966a-126bb2b65b79.png">
-<img width="410" alt="image" src="https://user-images.githubusercontent.com/41052126/164878723-974cd788-0bac-4a3a-bd40-7a576f95605b.png">
-
-## 6. 숙소 호스트 관리 페이지
-<img width="391" alt="image" src="https://user-images.githubusercontent.com/41052126/164878725-61ef0f0d-b277-4e72-8d59-9282273f5221.png">
-
 --------------
-
 
 ## 03.19
 ### footer 퍼블리싱 완성하기
