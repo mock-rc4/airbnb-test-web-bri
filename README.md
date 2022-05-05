@@ -1,6 +1,7 @@
 # 에어비엔비 클론코딩
 
-## 🎥 **시연영상** : 
+## 🎥 **시연영상** 
+https://youtu.be/jxzm2TnzVgI
 ## 📝 **api 명세서**
 [https://docs.google.com/spreadsheets/d/1wr3kIZvF-LY8imqpLncERY5Uze8-yTFfsUEjFeqHM0Q/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1wr3kIZvF-LY8imqpLncERY5Uze8-yTFfsUEjFeqHM0Q/edit?usp=sharing)
 ## 📆 **개발기간 
@@ -23,7 +24,7 @@
 ![image](https://user-images.githubusercontent.com/41052126/161188732-ec2a67f8-0e7b-499e-b245-21e7fb58740a.png)
 ![image](https://user-images.githubusercontent.com/41052126/161188972-d22f6063-7322-4b8a-8fa0-a0514d892c4b.png)
 
-## 🎨 시연
+## 🎨 자세한 일지(웹 시연 갤러리, 개발일지, 회고 등)
 https://www.notion.so/0d00e85aa1b14d349c02876696612ea1
 ---
 
