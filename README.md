@@ -20,11 +20,8 @@
 ![image](https://user-images.githubusercontent.com/41052126/161188732-ec2a67f8-0e7b-499e-b245-21e7fb58740a.png)
 ![image](https://user-images.githubusercontent.com/41052126/161188972-d22f6063-7322-4b8a-8fa0-a0514d892c4b.png)
 
-## 시연
+## 🎨 시연
 ## 0. 메인페이지
-
-![메인화면.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a2f96831-4ae8-4c31-a818-eee749314540/메인화면.gif)
-
 ## 1. 유저정보관련 페이지
 
 ### 1-1. 로그인 / 회원가입
