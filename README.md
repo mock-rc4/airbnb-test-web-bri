@@ -1,7 +1,7 @@
 # 에어비엔비 클론코딩
 
 ## 🎥 **시연영상** 
-https://youtu.be/jxzm2TnzVgI
+https://youtu.be/-48D6tgpnWA
 ## 📝 **api 명세서**
 [https://docs.google.com/spreadsheets/d/1wr3kIZvF-LY8imqpLncERY5Uze8-yTFfsUEjFeqHM0Q/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1wr3kIZvF-LY8imqpLncERY5Uze8-yTFfsUEjFeqHM0Q/edit?usp=sharing)
 ## 📆 **개발기간 
