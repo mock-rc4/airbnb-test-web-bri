@@ -3,10 +3,13 @@
 ## 🎥 **시연영상** : 
 ## 📝 **api 명세서**
 [https://docs.google.com/spreadsheets/d/1wr3kIZvF-LY8imqpLncERY5Uze8-yTFfsUEjFeqHM0Q/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1wr3kIZvF-LY8imqpLncERY5Uze8-yTFfsUEjFeqHM0Q/edit?usp=sharing)
-## 📆 **개발기간 :** 22.03.19 ~ 22.03.31 (약 2주)
-## 👨‍👩‍👧‍👦 **개발인원 :** Frontend 1명 (브리) , Backend 1명 (준)
-## 💬 **프론트엔드 사용기술 :** React, Styled-components, Firebase, Redux, Router
-## ✅ **에어비앤비 핵심기능 :  숙소 검색 및 예약
+## 📆 **개발기간 
+** 22.03.19 ~ 22.03.31 (약 2주)
+## 👨‍👩‍👧‍👦 **개발인원 
+** Frontend 1명 (브리) , Backend 1명 (준)
+## 💬 **프론트엔드 사용기술 
+** React, Styled-components, Firebase, Redux, Router
+## ✅ **에어비앤비 핵심기능 
 ✔️ 구현기능**
 0. 메인페이지
 1. 유저 정보 관련 페이지 (로그인, 회원가입, 회원정보 수정)
@@ -21,49 +24,7 @@
 ![image](https://user-images.githubusercontent.com/41052126/161188972-d22f6063-7322-4b8a-8fa0-a0514d892c4b.png)
 
 ## 🎨 시연
-## 0. 메인페이지
-## 1. 유저정보관련 페이지
-
-### 1-1. 로그인 / 회원가입
-
-![로그인 회원가입 움짤.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2fc84fcf-9d34-4e03-a8b7-8812af6997f6/로그인_회원가입_움짤.gif)
-
-### 1-2. 회원정보 수정
-
-![개인정보수정.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5395f1e9-120b-4a7a-bea1-ed40b1b667f3/개인정보수정.gif)
-
-## 2. 숙소 검색 및 상세페이지
-
-![숙소검색.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de2641a1-713a-41e9-86ee-5a971edb7d9c/숙소검색.gif)
-
-![상세페이지.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/58e57155-cc74-4b3d-8656-161a91c0bb29/상세페이지.gif)
-
-## 3. 숙소 예약 및 확인
-
-- 예약한 여행 없을 때 화면
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1d671221-f083-4bee-a85b-fc7405354c8e/Untitled.png)
-
-- 여행 예약과정 + 예약 숙소 있을 때 화면
-    
-    ![숙소예약.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/08ec1042-c167-4199-908e-dbe0dc72d723/숙소예약.gif)
-    
-
-## 4. 숙소 호스팅
-
-![숙소호스팅1.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1283262c-8613-4296-85de-e2e198c14001/숙소호스팅1.gif)
-
-![숙소호스팅2.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92b5fe7b-85b7-47fc-a3cf-b59cfd8f0531/숙소호스팅2.gif)
-
-## 5. 위시리스트
-
-![위시리스트.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5bc27dbf-460c-4ba6-91cf-fb868843cde0/위시리스트.gif)
-
-## 6. 숙소 호스트 관리 페이지
-
-![숙소관리.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b2b6c9af-dcf8-478a-b8ca-b063bf6fe50e/숙소관리.gif)
-
-## 7. 반응형 구현
+https://www.notion.so/0d00e85aa1b14d349c02876696612ea1
 ---
 
 ### 개발일지
